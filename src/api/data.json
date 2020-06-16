@@ -1,0 +1,14 @@
+{
+    "board": {
+        "columns": [
+            {
+                "id": 1,
+                "title": "Default column"
+            },
+            {
+                "id": 2,
+                "title": "Second column"
+            }
+        ]
+    }
+}
