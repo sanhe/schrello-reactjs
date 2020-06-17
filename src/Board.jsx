@@ -2,18 +2,26 @@ import React from 'react';
 import Column from "./Column";
 import { Row } from 'reactstrap';
 import AddColumnButton from "./AddColumn";
-
-function getColumn(id, title) {
-    return <Column key={id} title={title} />;
-}
+import Loader from "./Loader";
 
 class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            columnsData: props.data.board.columns
+            columnsData: props.data.board.columns,
+            loading: true
         };
         this.addColumn = this.addColumn.bind(this);
+    }
+
+    componentDidMount() {
+        this.setLoading(false);
+    }
+
+    setLoading(isLoading) {
+        this.setState(() => ({
+            loading: isLoading
+        }));
     }
 
     addColumn(e) {
@@ -33,8 +41,12 @@ class Board extends React.Component {
         });
     }
 
+    getColumn(id, title) {
+        return <Column key={id} title={title} />;
+    }
+
     getColumns() {
-        return this.state.columnsData.map(item => getColumn(item.id, item.title));
+        return this.state.columnsData.map(item => this.getColumn(item.id, item.title));
     }
 
     render() {
@@ -43,6 +55,7 @@ class Board extends React.Component {
                 <Row>
                     <AddColumnButton onClick={this.addColumn} />
                 </Row>
+                { this.state.loading && <Loader /> }
                 <Row>
                     { this.getColumns() }
                 </Row>
