@@ -2,11 +2,17 @@
     "board": {
         "columns": [
             {
-                "id": 1,
-                "title": "Default column"
+                "columnId": 1,
+                "title": "Default column",
+                "cards": [
+                    {
+                        "cardId": 1,
+                        "title": "Default card"
+                    }
+                ]
             },
             {
-                "id": 2,
+                "columnId": 2,
                 "title": "Second column"
             }
         ]

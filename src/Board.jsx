@@ -1,17 +1,24 @@
 import React from 'react';
-import Column from "./Column";
 import { Row } from 'reactstrap';
 import AddColumnButton from "./AddColumn";
 import Loader from "./Loader";
+import Columns from "./Components/Columns";
+import {addColumn} from "./actions/actions";
+import {connect} from "react-redux";
 
-class Board extends React.Component {
+function mapDispatchToProps(dispatch) {
+    return {
+        addColumn: (title) => dispatch(addColumn(title))
+    };
+}
+
+class ConnectedBoard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            columnsData: props.data.board.columns,
             loading: true
         };
-        this.addColumn = this.addColumn.bind(this);
+        this.addColumnHandler = this.addColumnHandler.bind(this);
     }
 
     componentDidMount() {
@@ -24,44 +31,29 @@ class Board extends React.Component {
         }));
     }
 
-    addColumn(e) {
+    addColumnHandler(e) {
         e.preventDefault();
-
-        this.setState((prevState) => {
-            const defaultColumnTitle = 'New column';
-            const columns = prevState.columnsData.slice();
-            columns.push({
-                id: prevState.columnsData.length + 1,
-                title: defaultColumnTitle
-            });
-
-            return {
-                columnsData: columns
-            };
-        });
-    }
-
-    getColumn(id, title) {
-        return <Column key={id} title={title} />;
-    }
-
-    getColumns() {
-        return this.state.columnsData.map(item => this.getColumn(item.id, item.title));
+        this.props.addColumn('New col');
     }
 
     render() {
         return (
             <>
                 <Row>
-                    <AddColumnButton onClick={this.addColumn} />
+                    <AddColumnButton onClick={this.addColumnHandler} />
                 </Row>
                 { this.state.loading && <Loader /> }
                 <Row>
-                    { this.getColumns() }
+                    <Columns />
                 </Row>
             </>
         );
     }
 }
+
+const Board = connect(
+    null,
+    mapDispatchToProps
+)(ConnectedBoard);
 
 export default Board;
