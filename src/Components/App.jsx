@@ -2,10 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import NavBar from './NavBar';
-import './App.css';
-import Board from "./Board";
+import '../Styles/App.css';
 import About from "./About";
-import data from "./api/data.json";
+import data from "../api/data.json";
+import Board from "./Board";
 
 class App extends React.Component {
     render() {

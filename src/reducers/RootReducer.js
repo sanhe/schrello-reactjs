@@ -1,5 +1,7 @@
 import {combineReducers} from "redux";
-import {ADD_CARD, ADD_COLUMN, REMOVE_CARD, REMOVE_COLUMN} from "../actionTypes/types";
+import {ADD_CARD, ADD_COLUMN, REMOVE_CARD, REMOVE_COLUMN} from "../types/ActionTypes";
+import {APP_BOARD} from "../types/ReducerTypes";
+import {nanoid} from "@reduxjs/toolkit";
 
 const initialBoardState = {
     columns: [
@@ -44,26 +46,27 @@ const newStateByColumns = (state, newColumn) => ({
 function boardReducer(state = initialBoardState, action) {
     switch (action.type) {
         case ADD_COLUMN: {
-            const columnId = state.columns.length + 1;
+            const columnId = nanoid();
+            const { title } = action.payload;
             const newColumn = {
                 columnId: columnId,
-                title: action.title,
+                title: title,
                 cards: []
             };
 
             return newStateByColumns(state, newColumn);
         }
         case REMOVE_COLUMN: {
-            const removeColumnId = state.columns.columnId;
+            const { columnId: removeColumnId } = action.payload;
             return {
                 ...state,
                 columns: state.columns.filter(column => column.columnId !== removeColumnId)
             };
         }
         case ADD_CARD: {
-            const columnId = action.columnId;
+            const { columnId } = action.payload;
             const column = state.columns.find((item, itemId) => itemId === columnId);
-            const cardId = column.cards.length;
+            const cardId = nanoid();
             const newCard = {
                 cardId: cardId,
                 title: action.title
@@ -75,8 +78,7 @@ function boardReducer(state = initialBoardState, action) {
             return newStateByColumns(state, updatedColumn);
         }
         case REMOVE_CARD: {
-            const columnId = action.columnId;
-            const removeCardId = action.cardId;
+            const { columnId, cardId: removeCardId } = action.payload;
             const currentColumn = state.columns.find(item => item.columnId === columnId);
             const updatedColumn = currentColumn.cards.filter(item => item.cardId !== removeCardId);
             return newStateByColumns(state, updatedColumn);
@@ -87,7 +89,8 @@ function boardReducer(state = initialBoardState, action) {
 }
 
 const rootReducer = combineReducers({
+    // `${APP_BOARD}`: boardReducer
     board: boardReducer
-});
+})
 
 export default rootReducer;

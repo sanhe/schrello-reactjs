@@ -2,15 +2,13 @@ import React from 'react';
 import { Row } from 'reactstrap';
 import AddColumnButton from "./AddColumn";
 import Loader from "./Loader";
-import Columns from "./Components/Columns";
-import {addColumn} from "./actions/actions";
+import Columns from "./Columns";
 import {connect} from "react-redux";
+import {addColumn} from "../actions/Actions";
 
-function mapDispatchToProps(dispatch) {
-    return {
-        addColumn: (title) => dispatch(addColumn(title))
-    };
-}
+const mapDispatchToProps = dispatch => ({
+    addColumn: title => dispatch(addColumn(title))
+});
 
 class ConnectedBoard extends React.Component {
     constructor(props) {
