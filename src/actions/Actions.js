@@ -1,21 +1,21 @@
-import {ADD_CARD, ADD_COLUMN, REMOVE_CARD, REMOVE_COLUMN} from "../types/ActionTypes";
+import ActionTypes from "../types/ActionTypes";
 
 export const addColumn = (title = 'New Column') => ({
-    type: ADD_COLUMN,
+    type: ActionTypes.ADD_COLUMN,
     payload: {
         title
     }
 });
 
 export const removeColumn = columnId => ({
-    type: REMOVE_COLUMN,
+    type: ActionTypes.REMOVE_COLUMN,
     payload: {
         columnId
     }
 });
 
 export const addCard = (title = 'New Card', columnId) => ({
-    type: ADD_CARD,
+    type: ActionTypes.ADD_CARD,
     payload: {
         title,
         columnId
@@ -23,7 +23,7 @@ export const addCard = (title = 'New Card', columnId) => ({
 });
 
 export const removeCard = (columnId, cardId) => ({
-    type: REMOVE_CARD,
+    type: ActionTypes.REMOVE_CARD,
     payload: {
         columnId,
         cardId

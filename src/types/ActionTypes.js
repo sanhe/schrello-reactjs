@@ -1,5 +1,10 @@
-export const ADD_COLUMN = 'ADD_COLUMN';
-export const REMOVE_COLUMN = 'REMOVE_COLUMN';
+import keyMirror from "keymirror";
 
-export const ADD_CARD = 'ADD_CARD';
-export const REMOVE_CARD = 'REMOVE_CARD';
+const ActionTypes = keyMirror({
+    ADD_COLUMN: null,
+    REMOVE_COLUMN: null,
+    ADD_CARD: null,
+    REMOVE_CARD: null,
+});
+
+export default ActionTypes;

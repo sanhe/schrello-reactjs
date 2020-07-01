@@ -9,27 +9,29 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    removeColumn: (columnId) => dispatch(removeColumn(columnId))
+    removeColumn: (columnId) => dispatch(removeColumn(columnId)),
 });
 
-const ConnectedColumns = ({columns, removeColumn}) => (
+const Columns = ({columns, removeColumn}) => (
     <>
         {columns && columns.length
             ? columns.map(column => (
-                <Column key={column.columnId} title={column.title} onRemoveColumn={() => removeColumn(column.columnId)}/>
+                <Column
+                    key={column.columnId}
+                    title={column.title}
+                    onRemoveColumn={() => removeColumn(column.columnId)}
+                />
             ))
             : "No columns yet!"}
     </>
 );
 
-ConnectedColumns.propTypes = {
-    columns: PropTypes.array.isRequired,
-    removeColumn: PropTypes.func.isRequired,
-}
-
-const Columns = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ConnectedColumns);
+)(Columns);
 
-export default Columns;
+Columns.propTypes = {
+    columns: PropTypes.array.isRequired,
+    removeColumn: PropTypes.func.isRequired,
+};

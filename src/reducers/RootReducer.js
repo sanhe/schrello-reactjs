@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
-import {ADD_CARD, ADD_COLUMN, REMOVE_CARD, REMOVE_COLUMN} from "../types/ActionTypes";
-import {APP_BOARD} from "../types/ReducerTypes";
 import {nanoid} from "@reduxjs/toolkit";
+import ActionTypes from "../types/ActionTypes";
+import modalReducer from "./ModalReducer";
 
 const initialBoardState = {
     columns: [
@@ -45,7 +45,7 @@ const newStateByColumns = (state, newColumn) => ({
 
 function boardReducer(state = initialBoardState, action) {
     switch (action.type) {
-        case ADD_COLUMN: {
+        case ActionTypes.ADD_COLUMN: {
             const columnId = nanoid();
             const { title } = action.payload;
             const newColumn = {
@@ -56,14 +56,14 @@ function boardReducer(state = initialBoardState, action) {
 
             return newStateByColumns(state, newColumn);
         }
-        case REMOVE_COLUMN: {
+        case ActionTypes.REMOVE_COLUMN: {
             const { columnId: removeColumnId } = action.payload;
             return {
                 ...state,
                 columns: state.columns.filter(column => column.columnId !== removeColumnId)
             };
         }
-        case ADD_CARD: {
+        case ActionTypes.ADD_CARD: {
             const { columnId } = action.payload;
             const column = state.columns.find((item, itemId) => itemId === columnId);
             const cardId = nanoid();
@@ -77,7 +77,7 @@ function boardReducer(state = initialBoardState, action) {
             }
             return newStateByColumns(state, updatedColumn);
         }
-        case REMOVE_CARD: {
+        case ActionTypes.REMOVE_CARD: {
             const { columnId, cardId: removeCardId } = action.payload;
             const currentColumn = state.columns.find(item => item.columnId === columnId);
             const updatedColumn = currentColumn.cards.filter(item => item.cardId !== removeCardId);
@@ -89,8 +89,8 @@ function boardReducer(state = initialBoardState, action) {
 }
 
 const rootReducer = combineReducers({
-    // `${APP_BOARD}`: boardReducer
-    board: boardReducer
+    board: boardReducer,
+    modal: modalReducer,
 })
 
 export default rootReducer;

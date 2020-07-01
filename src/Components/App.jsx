@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import NavBar from './NavBar';
-import '../Styles/App.css';
+import '../styles/App.css';
 import About from "./About";
 import data from "../api/data.json";
 import Board from "./Board";
