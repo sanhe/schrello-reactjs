@@ -5,7 +5,7 @@ import {removeColumn} from "../actions/Actions";
 import PropTypes from "prop-types";
 
 const mapStateToProps = state => ({
-    columns: state.board.columns
+    columns: state.columns
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => ({
 
 const Columns = ({columns, removeColumn}) => (
     <>
+        {console.log(columns)}
         {columns && columns.length
             ? columns.map(column => (
                 <Column
