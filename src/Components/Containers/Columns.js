@@ -4,14 +4,6 @@ import Column from "../Column";
 import {removeColumn} from "../../actions/Actions";
 import PropTypes from "prop-types";
 
-const mapStateToProps = state => ({
-    columns: state.columns
-});
-
-const mapDispatchToProps = dispatch => ({
-    removeColumn: (columnId) => dispatch(removeColumn(columnId)),
-});
-
 const Columns = ({columns, removeColumn}) => (
     <>
         {columns && columns.length
@@ -25,6 +17,14 @@ const Columns = ({columns, removeColumn}) => (
             : "No columns yet!"}
     </>
 );
+
+const mapStateToProps = state => ({
+    columns: state.columns
+});
+
+const mapDispatchToProps = dispatch => ({
+    removeColumn: (columnId) => dispatch(removeColumn(columnId)),
+});
 
 export default connect(
     mapStateToProps,
