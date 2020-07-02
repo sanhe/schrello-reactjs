@@ -30,7 +30,7 @@ export const initialCardsState = [
     {
         cardId: "1",
         columnId: "1",
-        title: "Default card",
+        title: "Card 1",
         timestamp: new Date().toString(),
     },
     {

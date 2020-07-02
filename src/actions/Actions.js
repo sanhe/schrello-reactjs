@@ -43,7 +43,8 @@ export const addCard = (title = 'New Card', columnId) => ({
 
 export const removeCard = (columnId, cardId) => ({
     type: ActionTypes.REMOVE_CARD,
-    cardId
+    columnId,
+    cardId,
 });
 
 
