@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row } from 'reactstrap';
-import AddColumnButton from "./AddColumn";
+import AddColumnButton from "./AddColumnButton";
 import Loader from "./Loader";
-import Columns from "./Columns";
+import Columns from "./Containers/Columns";
 import {connect} from "react-redux";
 import {addColumn} from "../actions/Actions";
 import {hideModal, showModal} from "../actions/ModalActions";
@@ -62,7 +62,7 @@ class Board extends React.Component {
         return (
             <>
                 <Row>
-                    <AddColumnButton onClick={this.addColumnHandler} />
+                    {/*<AddColumnButton onClick={this.addColumnHandler} />*/}
                     <button
                         className="btn btn-outline-primary btn-block"
                         onClick={this.openAlertModal}

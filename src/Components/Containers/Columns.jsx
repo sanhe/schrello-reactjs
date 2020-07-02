@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import Column from "./Column";
-import {removeColumn} from "../actions/Actions";
+import Column from "../Column";
+import {removeColumn} from "../../actions/Actions";
 import PropTypes from "prop-types";
 
 const mapStateToProps = state => ({
@@ -14,7 +14,6 @@ const mapDispatchToProps = dispatch => ({
 
 const Columns = ({columns, removeColumn}) => (
     <>
-        {console.log(columns)}
         {columns && columns.length
             ? columns.map(column => (
                 <Column

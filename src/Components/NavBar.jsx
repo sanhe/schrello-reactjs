@@ -5,6 +5,7 @@ import {
     Navbar,
     Nav,
     NavItem } from 'reactstrap';
+import {AddColumn} from "./Containers/AddColumn";
 
 export default class NavBar extends React.Component {
     render() {
@@ -18,6 +19,9 @@ export default class NavBar extends React.Component {
                             </NavItem>
                         </Nav>
                         <Nav className="justify-content-end" navbar>
+                            <NavItem>
+                                <AddColumn />
+                            </NavItem>
                             <NavItem>
                                 <RouterNavLink to="/about" className="nav-link" exact>About</RouterNavLink>
                             </NavItem>

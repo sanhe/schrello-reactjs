@@ -3,7 +3,6 @@ import {initialColumnsState} from "./initialStates";
 
 const columnReducer = (state = {}, action) => {
     const column = action.column;
-console.log('bbb', column);
     switch (action.type) {
         case ActionTypes.ADD_COLUMN: {
             return {
@@ -17,7 +16,6 @@ console.log('bbb', column);
 }
 
 const columnsReducer = (state = initialColumnsState, action) => {
-console.log('aaa', state);
     switch (action.type) {
         case ActionTypes.ADD_COLUMN: {
             return [
