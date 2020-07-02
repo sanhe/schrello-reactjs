@@ -1,13 +1,7 @@
 import ModalActionTypes from "../types/ModalActionTypes";
+import {initialModalState} from "./initialStates";
 
-const initialState = {
-    modalType: null,
-    modalProps: {
-        open: false
-    }
-};
-
-const modalReducer = (state = initialState, action) => {
+const modalReducer = (state = initialModalState, action) => {
     switch (action.type) {
         case ModalActionTypes.SHOW_MODAL:
             return {
@@ -16,7 +10,7 @@ const modalReducer = (state = initialState, action) => {
                 type: action.type
             }
         case ModalActionTypes.HIDE_MODAL:
-            return initialState
+            return initialModalState
         default:
             return state
     }

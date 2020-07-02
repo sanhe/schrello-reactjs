@@ -46,3 +46,18 @@ export const initialCardsState = [
         timestamp: new Date().toString(),
     },
 ];
+
+export const initialModalState = {
+    modalType: null,
+    modalProps: {
+        open: false
+    }
+};
+
+export const initialState = {
+    boards: initialBoardsState,
+    columns: initialColumnsState,
+    cards: initialCardsState,
+    currentBoardId: DEFAULT_BOARD_ID,
+    modal: initialModalState
+};

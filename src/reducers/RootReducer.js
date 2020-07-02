@@ -1,5 +1,5 @@
 import {combineReducers} from "redux";
-import modalReducer from "./ModalReducer";
+import modalReducer from "./modalReducer";
 import currentBoardReducer from "./currentBoardReducer";
 import boardsReducer from "./boardsReducer";
 import columnsReducer from "./columnsReducer";
