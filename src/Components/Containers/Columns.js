@@ -32,6 +32,11 @@ export default connect(
 )(Columns);
 
 Columns.propTypes = {
-    columns: PropTypes.array.isRequired,
+    columns: PropTypes.arrayOf(
+        PropTypes.shape({
+            columnId: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+        }).isRequired
+    ).isRequired,
     removeColumn: PropTypes.func.isRequired,
 };

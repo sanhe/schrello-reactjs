@@ -1,5 +1,6 @@
 import ActionTypes from "../types/ActionTypes";
 import {initialBoardsState} from "./initialStates";
+import {createReducer} from "@reduxjs/toolkit";
 
 const boardReducer = (state = {}, action) => {
     const board = action.board;
@@ -15,21 +16,9 @@ const boardReducer = (state = {}, action) => {
     }
 }
 
-const boardsReducer = (state = initialBoardsState, action) => {
-    switch (action.type) {
-        case ActionTypes.ADD_BOARD: {
-            return [
-                ...state,
-                boardReducer({}, action)
-            ];
-        }
-        case ActionTypes.REMOVE_BOARD: {
-            const {boardId} = action;
-            return state.filter(board => board.boardId !== boardId);
-        }
-        default:
-            return state;
-    }
-}
+const boardsReducer = createReducer(initialBoardsState, {
+    [ActionTypes.ADD_BOARD]: (state, action) => [...state, boardReducer({}, action)],
+    [ActionTypes.REMOVE_BOARD]: (state, {boardId}) => state.filter(board => board.boardId !== boardId),
+});
 
 export default boardsReducer;
