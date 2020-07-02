@@ -7,19 +7,19 @@ export const initialBoardsState = [{
 
 export const initialColumnsState = [
     {
-        columnId: 1,
+        columnId: "1",
         boardId: DEFAULT_BOARD_ID,
         title: "Default column",
         timestamp: new Date().toString(),
     },
     {
-        columnId: 2,
+        columnId: "2",
         boardId: DEFAULT_BOARD_ID,
         title: "Second column",
         timestamp: new Date().toString(),
     },
     {
-        columnId: 3,
+        columnId: "3",
         boardId: DEFAULT_BOARD_ID,
         title: "Second column",
         timestamp: new Date().toString(),
@@ -28,20 +28,20 @@ export const initialColumnsState = [
 
 export const initialCardsState = [
     {
-        cardId: 1,
-        columnId: 1,
+        cardId: "1",
+        columnId: "1",
         title: "Default card",
         timestamp: new Date().toString(),
     },
     {
-        cardId: 2,
-        columnId: 1,
+        cardId: "2",
+        columnId: "1",
         title: "Default card",
         timestamp: new Date().toString(),
     },
     {
-        cardId: 1,
-        columnId: 2,
+        cardId: "1",
+        columnId: "2",
         title: "Default card",
         timestamp: new Date().toString(),
     },

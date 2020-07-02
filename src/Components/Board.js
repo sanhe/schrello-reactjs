@@ -1,6 +1,5 @@
 import React from 'react';
 import { Row } from 'reactstrap';
-import AddColumnButton from "./AddColumnButton";
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
 import {connect} from "react-redux";

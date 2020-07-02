@@ -10,6 +10,7 @@ const Columns = ({columns, removeColumn}) => (
             ? columns.map(column => (
                 <Column
                     key={column.columnId}
+                    columnId={column.columnId}
                     title={column.title}
                     onRemoveColumn={() => removeColumn(column.columnId)}
                 />
@@ -19,7 +20,7 @@ const Columns = ({columns, removeColumn}) => (
 );
 
 const mapStateToProps = state => ({
-    columns: state.columns
+    columns: state.columns,
 });
 
 const mapDispatchToProps = dispatch => ({
