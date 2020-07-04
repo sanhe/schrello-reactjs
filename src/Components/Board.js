@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { Row } from 'reactstrap';
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";

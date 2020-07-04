@@ -4,8 +4,9 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
+        "react-app",
+        "airbnb",
+        "plugin:jsx-a11y/recommended",
         "prettier",
         "prettier/react"
     ],
@@ -22,9 +23,17 @@ module.exports = {
     },
     "plugins": [
         "react",
+        "jsx-a11y",
         "prettier"
     ],
     "rules": {
+        "semi": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "prettier/prettier": [
+            "error", {
+                "semi": true
+            }
+        ]
     },
     "settings": {
         "react": {
