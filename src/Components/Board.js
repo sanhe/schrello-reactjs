@@ -3,7 +3,7 @@ import { Row } from 'reactstrap';
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
 import {connect} from "react-redux";
-import {addColumn} from "../actions/Actions";
+import { addColumn } from "../actions/Actions";
 import {hideModal, showModal} from "../actions/ModalActions";
 import PropTypes from "prop-types";
 import ModalRoot from "./Modals/ModalRoot";
