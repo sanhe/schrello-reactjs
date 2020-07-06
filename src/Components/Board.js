@@ -1,19 +1,19 @@
 import React from "react";
-import { Row } from 'reactstrap';
+import { Row } from "reactstrap";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
-import {connect} from "react-redux";
-import {addColumn} from "../actions/Actions";
-import {hideModal, showModal} from "../actions/ModalActions";
-import PropTypes from "prop-types";
-import ModalRoot from "./Modals/ModalRoot";
-import {DEFAULT_BOARD_ID} from "../reducers/initialStates";
+import { addColumn } from "../actions/Actions";
+import { hideModal, showModal } from "../actions/ModalActions";
+// import ModalRoot from "../../temp/Modal/ModalRoot";
+import { DEFAULT_BOARD_ID } from "../store/initialStates";
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     addColumn: (title, boardId) => dispatch(addColumn(title, boardId)),
     hideModal: () => dispatch(hideModal()),
     showModal: (modalProps, modalType) => {
-        dispatch(showModal({ modalProps, modalType }))
+        dispatch(showModal({ modalProps, modalType }));
     },
 });
 
@@ -21,7 +21,7 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
+            loading: true,
         };
         this.addColumnHandler = this.addColumnHandler.bind(this);
         this.openAlertModal = this.openAlertModal.bind(this);
@@ -34,41 +34,47 @@ class Board extends React.Component {
 
     setLoading(isLoading) {
         this.setState(() => ({
-            loading: isLoading
+            loading: isLoading,
         }));
     }
 
     addColumnHandler(e) {
         e.preventDefault();
-        this.props.addColumn('New col', DEFAULT_BOARD_ID);
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.addColumn("New col", DEFAULT_BOARD_ID);
     }
 
     openAlertModal(e) {
         e.preventDefault();
-        this.props.showModal({
-            open: true,
-            title: 'Alert Modal',
-            message: 'MESSAGE',
-            closeModal: this.closeModal
-        }, 'alert');
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.showModal(
+            {
+                open: true,
+                title: "Alert Modal",
+                message: "MESSAGE",
+                closeModal: this.closeModal,
+            },
+            "alert",
+        );
     }
 
     closeModal() {
-        this.props.hideModal()
+        // eslint-disable-next-line react/destructuring-assignment
+        this.props.hideModal();
     }
 
     render() {
         return (
             <>
                 <Row>
-                    {/*<AddColumnButton onClick={this.addColumnHandler} />*/}
-                    <button
-                        className="btn btn-outline-primary btn-block"
-                        onClick={this.openAlertModal}
-                    >alert</button>
-                    <ModalRoot hideModal={this.props.hideModal} />
+                    {/* eslint-disable-next-line react/button-has-type */}
+                    <button className="btn btn-outline-primary btn-block" onClick={this.openAlertModal}>
+                        alert
+                    </button>
+                    {/* <ModalRoot hideModal={this.props.hideModal} /> */}
                 </Row>
-                { this.state.loading && <Loader /> }
+                {/* eslint-disable-next-line react/destructuring-assignment */}
+                {this.state.loading && <Loader />}
                 <Row>
                     <Columns />
                 </Row>
@@ -77,10 +83,7 @@ class Board extends React.Component {
     }
 }
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(Board);
+export default connect(null, mapDispatchToProps)(Board);
 
 Board.propTypes = {
     addColumn: PropTypes.func.isRequired,

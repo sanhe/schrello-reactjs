@@ -1,18 +1,17 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import AddColumnButton from "../AddColumnButton";
-import {addColumn} from "../../actions/Actions";
+import { addColumn } from "../../actions/Actions";
 
-const mapStateToProps = state => ({
-    currentBoardId: state.currentBoardId
+const mapStateToProps = (state) => ({
+    currentBoardId: state.currentBoardId,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     onAddColumn(title, boardId) {
-        dispatch(addColumn(title, boardId))
-    }
+        dispatch(addColumn(title, boardId));
+    },
 });
 
-export const AddColumn = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AddColumnButton);
+const AddColumn = connect(mapStateToProps, mapDispatchToProps)(AddColumnButton);
+
+export default AddColumn;

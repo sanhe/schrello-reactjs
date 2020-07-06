@@ -1,22 +1,22 @@
+import { nanoid } from "@reduxjs/toolkit";
 import ActionTypes from "../types/ActionTypes";
-import {nanoid} from "@reduxjs/toolkit";
-import {DEFAULT_BOARD_ID} from "../reducers/initialStates";
+import { DEFAULT_BOARD_ID } from "../store/initialStates";
 
-export const addBoard = (title = 'New Board') => ({
+export const addBoard = (title = "New Board") => ({
     type: ActionTypes.ADD_COLUMN,
     board: {
         boardId: nanoid(),
         title,
         timestamp: new Date().toString(),
-    }
+    },
 });
 
-export const removeBoard = boardId => ({
+export const removeBoard = (boardId) => ({
     type: ActionTypes.REMOVE_BOARD,
-    boardId
+    boardId,
 });
 
-export const addColumn = (title = 'New Column', boardId = DEFAULT_BOARD_ID) => ({
+export const addColumn = (title = "New Column", boardId = DEFAULT_BOARD_ID) => ({
     type: ActionTypes.ADD_COLUMN,
     column: {
         columnId: nanoid(),
@@ -26,12 +26,12 @@ export const addColumn = (title = 'New Column', boardId = DEFAULT_BOARD_ID) => (
     },
 });
 
-export const removeColumn = columnId => ({
+export const removeColumn = (columnId) => ({
     type: ActionTypes.REMOVE_COLUMN,
-    columnId
+    columnId,
 });
 
-export const addCard = (title = 'New Card', columnId) => ({
+export const addCard = (title = "New Card", columnId) => ({
     type: ActionTypes.ADD_CARD,
     card: {
         cardId: nanoid(),
@@ -46,5 +46,3 @@ export const removeCard = (columnId, cardId) => ({
     columnId,
     cardId,
 });
-
-

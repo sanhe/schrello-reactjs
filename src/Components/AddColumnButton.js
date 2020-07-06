@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import PropTypes from "prop-types";
 
 const AddColumnButton = ({ currentBoardId, onAddColumn }) => (
-    <Button onClick={() => onAddColumn('Def title', currentBoardId)}>+</Button>
+    <Button onClick={() => onAddColumn("Def title", currentBoardId)}>+</Button>
 );
 
 export default AddColumnButton;

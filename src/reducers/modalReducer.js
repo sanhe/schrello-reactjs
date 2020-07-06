@@ -1,5 +1,5 @@
 import ModalActionTypes from "../types/ModalActionTypes";
-import {initialModalState} from "./initialStates";
+import { initialModalState } from "../store/initialStates";
 
 const modalReducer = (state = initialModalState, action) => {
     switch (action.type) {
@@ -7,12 +7,12 @@ const modalReducer = (state = initialModalState, action) => {
             return {
                 modalProps: action.modalProps,
                 modalType: action.modalType,
-                type: action.type
-            }
+                type: action.type,
+            };
         case ModalActionTypes.HIDE_MODAL:
-            return initialModalState
+            return initialModalState;
         default:
-            return state
+            return state;
     }
 };
 

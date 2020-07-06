@@ -1,9 +1,9 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-import {logger} from "redux-logger";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { logger } from "redux-logger";
 import rootReducer from "../reducers/RootReducer";
-import {SchrelloLoger} from "../enhancers/SchrelloLoger";
-import {SCHRELLO_DEFAULT_STORE_NAME, SchrelloStateStore} from "../enhancers/SchrelloStateStore";
-import {initialState} from "../reducers/initialStates";
+import SchrelloLoger from "../enhancers/SchrelloLoger";
+import { SCHRELLO_DEFAULT_STORE_NAME, SchrelloStateStore } from "../enhancers/SchrelloStateStore";
+import { initialState } from "./initialStates";
 
 const store = configureStore({
     reducer: rootReducer,

@@ -1,9 +1,12 @@
 export const DEFAULT_BOARD_ID = "boardId1";
-export const initialBoardsState = [{
-    boardId: DEFAULT_BOARD_ID,
-    title: "Default Board",
-    timestamp: new Date().toString(),
-}];
+
+export const initialBoardsState = [
+    {
+        boardId: DEFAULT_BOARD_ID,
+        title: "Default Board",
+        timestamp: new Date().toString(),
+    },
+];
 
 export const initialColumnsState = [
     {
@@ -50,8 +53,8 @@ export const initialCardsState = [
 export const initialModalState = {
     modalType: null,
     modalProps: {
-        open: false
-    }
+        open: false,
+    },
 };
 
 export const initialState = {
@@ -59,5 +62,5 @@ export const initialState = {
     columns: initialColumnsState,
     cards: initialCardsState,
     currentBoardId: DEFAULT_BOARD_ID,
-    modal: initialModalState
+    modal: initialModalState,
 };
