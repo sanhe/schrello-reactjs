@@ -4,13 +4,10 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
-import { addColumn } from "../actions/Actions";
 import { hideModal, showModal } from "../actions/ModalActions";
 // import ModalRoot from "../../temp/Modal/ModalRoot";
-import { DEFAULT_BOARD_ID } from "../store/initialStates";
 
 const mapDispatchToProps = (dispatch) => ({
-    addColumn: (title, boardId) => dispatch(addColumn(title, boardId)),
     hideModal: () => dispatch(hideModal()),
     showModal: (modalProps, modalType) => {
         dispatch(showModal({ modalProps, modalType }));
@@ -23,7 +20,6 @@ class Board extends React.Component {
         this.state = {
             loading: true,
         };
-        this.addColumnHandler = this.addColumnHandler.bind(this);
         this.openAlertModal = this.openAlertModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
@@ -36,12 +32,6 @@ class Board extends React.Component {
         this.setState(() => ({
             loading: isLoading,
         }));
-    }
-
-    addColumnHandler(e) {
-        e.preventDefault();
-        // eslint-disable-next-line react/destructuring-assignment
-        this.props.addColumn("New col", DEFAULT_BOARD_ID);
     }
 
     openAlertModal(e) {
@@ -68,9 +58,9 @@ class Board extends React.Component {
             <>
                 <Row>
                     {/* eslint-disable-next-line react/button-has-type */}
-                    <button className="btn btn-outline-primary btn-block" onClick={this.openAlertModal}>
-                        alert
-                    </button>
+                    {/*<button className="btn btn-outline-primary btn-block" onClick={this.openAlertModal}>*/}
+                    {/*    alert*/}
+                    {/*</button>*/}
                     {/* <ModalRoot hideModal={this.props.hideModal} /> */}
                 </Row>
                 {/* eslint-disable-next-line react/destructuring-assignment */}
@@ -86,7 +76,6 @@ class Board extends React.Component {
 export default connect(null, mapDispatchToProps)(Board);
 
 Board.propTypes = {
-    addColumn: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
 };

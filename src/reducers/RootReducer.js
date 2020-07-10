@@ -1,4 +1,4 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 import modalReducer from "./modalReducer";
 import currentBoardReducer from "./currentBoardReducer";
 import boardsReducer from "./boardsReducer";
@@ -11,6 +11,6 @@ const rootReducer = combineReducers({
     cards: cardsReducer,
     currentBoardId: currentBoardReducer,
     modal: modalReducer,
-})
+});
 
 export default rootReducer;

@@ -1,9 +1,9 @@
+import { createReducer } from "@reduxjs/toolkit";
 import ActionTypes from "../types/ActionTypes";
 import { initialBoardsState } from "../store/initialStates";
-import { createReducer } from "@reduxjs/toolkit";
 
 const boardReducer = (state = {}, action) => {
-    const board = action.board;
+    const { board } = action;
     switch (action.type) {
         case ActionTypes.ADD_BOARD: {
             return {

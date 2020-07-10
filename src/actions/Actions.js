@@ -3,7 +3,7 @@ import ActionTypes from "../types/ActionTypes";
 import { DEFAULT_BOARD_ID } from "../store/initialStates";
 
 export const addBoard = (title = "New Board") => ({
-    type: ActionTypes.ADD_COLUMN,
+    type: ActionTypes.ADD_BOARD,
     board: {
         boardId: nanoid(),
         title,
