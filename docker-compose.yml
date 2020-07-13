@@ -9,7 +9,17 @@ services:
       - 4680:3000
     volumes:
       - ./frontend/src:/usr/src/app/src
-#      - ./frontend/public:/usr/src/app/public
       - ./frontend/node_modules:/usr/src/app/node_modules
     working_dir: /usr/src/app
     stdin_open: true
+
+  react-test:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    environment:
+      - CI=true
+    command: npm test
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - ./frontend/node_modules:/usr/src/app/node_modules
