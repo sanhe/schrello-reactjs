@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  react:
+  frontend:
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
@@ -13,7 +13,7 @@ services:
     working_dir: /usr/src/app
     stdin_open: true
 
-  react-test:
+  frontend-test:
     build:
       context: ./frontend
       dockerfile: ./Dockerfile
