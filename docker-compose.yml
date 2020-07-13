@@ -6,9 +6,10 @@ services:
       context: ./frontend
       dockerfile: ./Dockerfile
     ports:
-      - 4680:8080
+      - 4680:3000
     volumes:
       - ./frontend/src:/usr/src/app/src
-      - ./frontend/public:/usr/src/app/public
+#      - ./frontend/public:/usr/src/app/public
       - ./frontend/node_modules:/usr/src/app/node_modules
     working_dir: /usr/src/app
+    stdin_open: true
