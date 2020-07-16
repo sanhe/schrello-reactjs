@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Column from "../Column";
-import { removeColumn } from "../../actions/Actions";
+import { addColumn, removeColumn } from "../../actions/Actions";
 
 // eslint-disable-next-line no-shadow
 const Columns = ({ columns, removeColumn }) => (
@@ -14,6 +14,7 @@ const Columns = ({ columns, removeColumn }) => (
                       columnId={column.columnId}
                       title={column.title}
                       onRemoveColumn={() => removeColumn(column.columnId)}
+                      onAddColumn={() => addColumn()}
                   />
               ))
             : "No columns yet!"}
@@ -26,6 +27,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     removeColumn: (columnId) => dispatch(removeColumn(columnId)),
+    addColumn: () => dispatch(addColumn()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Columns);

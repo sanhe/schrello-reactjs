@@ -61,7 +61,8 @@ class Board extends React.Component {
                     {/*<button className="btn btn-outline-primary btn-block" onClick={this.openAlertModal}>*/}
                     {/*    alert*/}
                     {/*</button>*/}
-                    {/* <ModalRoot hideModal={this.props.hideModal} /> */}
+                     {/*<ModalRoot hideModal={this.props.hideModal} />*/}
+
                 </Row>
                 {/* eslint-disable-next-line react/destructuring-assignment */}
                 {this.state.loading && <Loader />}
