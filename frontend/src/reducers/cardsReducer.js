@@ -8,7 +8,7 @@ const cardReducer = (state = {}, action) => {
         case ActionTypes.ADD_CARD: {
             return {
                 ...state,
-                card,
+                ...card,
             };
         }
         default:

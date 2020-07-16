@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { ColumnCard } from "../ColumnCard";
+import ColumnCard from "../ColumnCard";
 import { removeCard } from "../../actions/Actions";
 
 // eslint-disable-next-line no-shadow
