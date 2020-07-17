@@ -31,6 +31,11 @@ export const removeColumn = (columnId) => ({
     columnId,
 });
 
+export const removeColumnCards = (columnId) => ({
+    type: ActionTypes.REMOVE_COLUMN_CARDS,
+    columnId,
+});
+
 export const addCard = (columnId, title, content, backgroundColorId) => ({
     type: ActionTypes.ADD_CARD,
     card: {

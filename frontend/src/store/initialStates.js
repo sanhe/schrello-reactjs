@@ -87,19 +87,10 @@ export const initialCardsState = [
     },
 ];
 
-export const initialModalState = {
-    modalType: null,
-    modalProps: {
-        open: false,
-    },
-};
-
 export const initialState = {
     boards: initialBoardsState,
     columns: initialColumnsState,
     cards: initialCardsState,
     currentBoardId: DEFAULT_BOARD_ID,
-    modal: initialModalState,
     colors: initialColors,
-    defaultCardBackgroundColorId: DEFAULT_CARD_BACKGROUND_COLOR_ID,
 };

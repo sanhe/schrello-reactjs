@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, FormGroup, Form, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { addCard } from "../../actions/Actions";
-import { initialState } from "../../store/initialStates";
+import { DEFAULT_CARD_BACKGROUND_COLOR_ID } from "../../store/initialStates";
 
 const AddCardModal = ({ columnId, buttonLabel, className, colors, onAddCard, cardTitle = "", cardContent = "" }) => {
     const [modal, setModal] = useState(false);
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
-    const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(initialState.defaultCardBackgroundColorId);
+    const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(DEFAULT_CARD_BACKGROUND_COLOR_ID);
     const toggle = () => setModal(!modal);
     const titleOnChange = (e) => {
         setTitleValue(e.target.value);
@@ -29,7 +29,7 @@ const AddCardModal = ({ columnId, buttonLabel, className, colors, onAddCard, car
         );
         setTitleValue("");
         setContentValue("");
-        setBackgroundColorIdValue(initialState.defaultCardBackgroundColorId);
+        setBackgroundColorIdValue(DEFAULT_CARD_BACKGROUND_COLOR_ID);
         toggle();
     };
 
@@ -64,7 +64,7 @@ const AddCardModal = ({ columnId, buttonLabel, className, colors, onAddCard, car
                         </FormGroup>
                         <FormGroup>
                             <Label for="cardBackgroundColor">Select background color</Label>
-                            <Input type="select" id="cardBackgroundColor" onChange={backgroundColorOnChange}>
+                            <Input type="select" id="cardBackgroundColor" onChange={backgroundColorOnChange} defaultValue={backgroundColorIdValue}>
                                 {colors && colors.length
                                     ? colors.map((color) => (
                                           <option

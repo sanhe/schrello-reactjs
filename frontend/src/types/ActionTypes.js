@@ -6,6 +6,7 @@ const ActionTypes = keyMirror({
     REMOVE_BOARD: null,
     ADD_COLUMN: null,
     REMOVE_COLUMN: null,
+    REMOVE_COLUMN_CARDS: null,
     ADD_CARD: null,
     REMOVE_CARD: null,
 });

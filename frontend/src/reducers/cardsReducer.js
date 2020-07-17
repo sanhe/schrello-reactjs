@@ -20,6 +20,7 @@ const cardsReducer = createReducer(initialCardsState, {
     [ActionTypes.ADD_CARD]: (state, action) => [...state, cardReducer({}, action)],
     [ActionTypes.REMOVE_CARD]: (state, action) =>
         state.filter((card) => card.columnId !== action.columnId || card.cardId !== action.cardId),
+    [ActionTypes.REMOVE_COLUMN_CARDS]: (state, action) => state.filter((card) => card.columnId !== action.columnId),
 });
 
 export default cardsReducer;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Column from "../Column";
-import { removeColumn } from "../../actions/Actions";
+import { dispatchRemoveColumn } from "../../actions/Dispatchers";
 
 // eslint-disable-next-line no-shadow
 const Columns = ({ columns, removeColumn }) => (
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    removeColumn: (columnId) => dispatch(removeColumn(columnId)),
+    removeColumn: (columnId) => dispatchRemoveColumn(dispatch, columnId),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Columns);
