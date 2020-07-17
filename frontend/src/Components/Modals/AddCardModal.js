@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, FormGroup, Form, Input } from "reactstrap";
+import { connect } from "react-redux";
+import { addCard } from "../../actions/Actions";
+import { initialState } from "../../store/initialStates";
 
-const AddCardModal = ({ columnId, buttonLabel, className, onAddCard, cardTitle = "", cardContent = "" }) => {
+const AddCardModal = ({ columnId, buttonLabel, className, colors, onAddCard, cardTitle = "", cardContent = "" }) => {
     const [modal, setModal] = useState(false);
     const [titleValue, setTitleValue] = useState("");
     const [contentValue, setContentValue] = useState("");
+    const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(initialState.defaultCardBackgroundColorId);
     const toggle = () => setModal(!modal);
     const titleOnChange = (e) => {
         setTitleValue(e.target.value);
@@ -13,15 +17,24 @@ const AddCardModal = ({ columnId, buttonLabel, className, onAddCard, cardTitle =
     const contentOnChange = (e) => {
         setContentValue(e.target.value);
     };
+    const backgroundColorOnChange = (e) => {
+        setBackgroundColorIdValue(e.target.value);
+    };
     const submitForm = () => {
-        onAddCard(columnId, document.getElementById("cardTitle").value, document.getElementById("cardContent").value);
+        onAddCard(
+            columnId,
+            document.getElementById("cardTitle").value,
+            document.getElementById("cardContent").value,
+            document.getElementById("cardBackgroundColor").value,
+        );
         setTitleValue("");
         setContentValue("");
+        setBackgroundColorIdValue(initialState.defaultCardBackgroundColorId);
         toggle();
     };
 
     return (
-        <div>
+        <div className="add-card">
             <Button color="success" onClick={toggle}>
                 {buttonLabel}
             </Button>
@@ -49,6 +62,22 @@ const AddCardModal = ({ columnId, buttonLabel, className, onAddCard, cardTitle =
                                 placeholder="Input card content"
                             />
                         </FormGroup>
+                        <FormGroup>
+                            <Label for="cardBackgroundColor">Select background color</Label>
+                            <Input type="select" id="cardBackgroundColor" onChange={backgroundColorOnChange}>
+                                {colors && colors.length
+                                    ? colors.map((color) => (
+                                          <option
+                                              value={color.colorId}
+                                              key={color.colorId}
+                                              style={{ background: color.code }}
+                                          >
+                                              {color.title}
+                                          </option>
+                                      ))
+                                    : "No colors available!"}
+                            </Input>
+                        </FormGroup>
                     </Form>
                 </ModalBody>
                 <ModalFooter>
@@ -64,7 +93,16 @@ const AddCardModal = ({ columnId, buttonLabel, className, onAddCard, cardTitle =
     );
 };
 
-export default AddCardModal;
+const mapStateToProps = (state) => ({
+    colors: state.colors,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onAddCard: (columnId, title, content, backgroundColorId) =>
+        dispatch(addCard(columnId, title, content, backgroundColorId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCardModal);
 
 AddCardModal.defaultProps = {
     cardTitle: "",
@@ -75,6 +113,7 @@ AddCardModal.propTypes = {
     columnId: PropTypes.string.isRequired,
     buttonLabel: PropTypes.string.isRequired,
     className: PropTypes.string.isRequired,
+    colors: PropTypes.array.isRequired,
     onAddCard: PropTypes.func.isRequired,
     cardTitle: PropTypes.string,
     cardContent: PropTypes.string,

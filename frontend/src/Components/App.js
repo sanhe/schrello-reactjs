@@ -10,7 +10,7 @@ import Board from "./Board";
 const App = () => (
     <Router>
         <NavBar />
-        <Container>
+        <Container fluid>
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
             <Route exact path="/" render={(props) => <Board data={data} {...props} />} />
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}

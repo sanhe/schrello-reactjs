@@ -6,7 +6,7 @@ import AddColumn from "./Containers/AddColumn";
 const NavBar = () => (
     <div>
         <Navbar color="dark" dark expand="md" fixed="top">
-            <Container>
+            <Container fluid>
                 <Nav navbar>
                     <NavItem>
                         <RouterNavLink to="/" className="nav-link" exact>

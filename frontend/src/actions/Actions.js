@@ -31,13 +31,14 @@ export const removeColumn = (columnId) => ({
     columnId,
 });
 
-export const addCard = (columnId, title, content) => ({
+export const addCard = (columnId, title, content, backgroundColorId) => ({
     type: ActionTypes.ADD_CARD,
     card: {
         cardId: nanoid(),
         columnId,
         title,
         content,
+        backgroundColorId,
         timestamp: new Date().toString(),
     },
 });

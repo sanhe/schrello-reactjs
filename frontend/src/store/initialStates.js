@@ -3,8 +3,9 @@ export const DEFAULT_BOARD_ID = "boardId1";
 export const initialColors = [
     {
         colorId: "1",
-        title: "White",
-        code: "#FFFFFF",
+        title: "Black",
+        code: "#000000",
+        isDefault: true,
     },
     {
         colorId: "2",
@@ -27,6 +28,8 @@ export const initialColors = [
         code: "#0000FF",
     },
 ];
+
+export const DEFAULT_CARD_BACKGROUND_COLOR_ID = "1";
 
 export const initialBoardsState = [
     {
@@ -98,4 +101,5 @@ export const initialState = {
     currentBoardId: DEFAULT_BOARD_ID,
     modal: initialModalState,
     colors: initialColors,
+    defaultCardBackgroundColorId: DEFAULT_CARD_BACKGROUND_COLOR_ID,
 };

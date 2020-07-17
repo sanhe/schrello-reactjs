@@ -7,6 +7,31 @@ body {
     margin-right: 5px;
 }
 
+.row .col .title {
+    margin: 10px 0 20px;
+    font-size: 1.2em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.row .col .title span {
+    margin-right: 10px;
+}
+
+.row .col .title button {
+    float: right;
+    margin-right: 0;
+}
+
+.add-card {
+    margin: 10px 0 10px;
+}
+
+.col .cards .card {
+    margin-bottom: 10px;
+}
+
 /* Loader */
 .lds-ripple {
     display: inline-block;
