@@ -16,7 +16,7 @@ export const removeBoard = (boardId) => ({
     boardId,
 });
 
-export const addColumn = (title = "New Column", boardId = DEFAULT_BOARD_ID) => ({
+export const addColumn = (title, backgroundColorId, boardId = DEFAULT_BOARD_ID) => ({
     type: ActionTypes.ADD_COLUMN,
     column: {
         columnId: nanoid(),

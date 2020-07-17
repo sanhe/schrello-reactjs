@@ -1,8 +1,8 @@
 import React from "react";
 import { shallow } from "enzyme";
 import "jest-enzyme";
-import Board from "./Board";
-import Columns from "./Containers/Columns";
+import Board from "../../Components/Board";
+import Columns from "../../Components/Containers/Columns";
 
 describe("Board Component", () => {
     it("Board renders correctly with shallow", () => {

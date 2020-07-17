@@ -2,9 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { Provider } from "react-redux";
 import { shallow } from "enzyme";
-import App from "./App";
-import store from "../store/Store";
-import NavBar from "./NavBar";
+import App from "../../Components/App";
+import store from "../../store/Store";
+import NavBar from "../../Components/NavBar";
 import "jest-enzyme";
 
 it("App renders correctly", () => {

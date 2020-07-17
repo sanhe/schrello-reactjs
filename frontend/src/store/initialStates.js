@@ -44,18 +44,21 @@ export const initialColumnsState = [
         columnId: "1",
         boardId: DEFAULT_BOARD_ID,
         title: "Default column",
+        backgroundColorId: "1",
         timestamp: new Date().toString(),
     },
     {
         columnId: "2",
         boardId: DEFAULT_BOARD_ID,
         title: "Second column",
+        backgroundColorId: "1",
         timestamp: new Date().toString(),
     },
     {
         columnId: "3",
         boardId: DEFAULT_BOARD_ID,
         title: "Second column",
+        backgroundColorId: "1",
         timestamp: new Date().toString(),
     },
 ];
