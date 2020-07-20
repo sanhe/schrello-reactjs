@@ -4,6 +4,7 @@ import boardsReducer from "./boardsReducer";
 import columnsReducer from "./columnsReducer";
 import cardsReducer from "./cardsReducer";
 import colorsReducer from "./colorsReducer";
+import modalReducer from "./modalReducer";
 
 const rootReducer = combineReducers({
     boards: boardsReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
     cards: cardsReducer,
     currentBoardId: currentBoardReducer,
     colors: colorsReducer,
+    modal: modalReducer,
 });
 
 export default rootReducer;

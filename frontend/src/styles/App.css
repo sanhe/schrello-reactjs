@@ -32,6 +32,10 @@ body {
     margin-bottom: 10px;
 }
 
+.card-body .btn {
+    margin-right: 10px;
+}
+
 /* Loader */
 .lds-ripple {
     display: inline-block;

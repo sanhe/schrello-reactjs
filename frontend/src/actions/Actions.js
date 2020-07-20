@@ -22,6 +22,7 @@ export const addColumn = (title, backgroundColorId, boardId = DEFAULT_BOARD_ID) 
         columnId: nanoid(),
         boardId,
         title,
+        backgroundColorId,
         timestamp: new Date().toString(),
     },
 });
@@ -48,8 +49,28 @@ export const addCard = (columnId, title, content, backgroundColorId) => ({
     },
 });
 
+export const editCard = (columnId, cardId, title, content, backgroundColorId) => ({
+    type: ActionTypes.EDIT_CARD,
+    card: {
+        cardId,
+        columnId,
+        title,
+        content,
+        backgroundColorId,
+        timestamp: new Date().toString(),
+    },
+});
+
 export const removeCard = (columnId, cardId) => ({
     type: ActionTypes.REMOVE_CARD,
     columnId,
     cardId,
+});
+
+export const toggleModal = (modalId, additionalData = {}) => ({
+    type: ActionTypes.TOGGLE_MODAL,
+    modal: {
+        modalId,
+        additionalData,
+    },
 });

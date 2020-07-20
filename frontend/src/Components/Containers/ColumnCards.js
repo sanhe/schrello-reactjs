@@ -2,15 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import ColumnCard from "../ColumnCard";
-import { removeCard } from "../../actions/Actions";
+import { removeCard, toggleModal } from "../../actions/Actions";
+import { getColorCodeByItem } from "../Color";
+import ModalTypes from "../../types/ModalTypes";
 
-const getColorCode = (colors, card) => {
-    const cardColor = colors.find((color) => color.colorId === card.backgroundColorId);
-    return cardColor ? cardColor.code : "red";
-};
-
-// eslint-disable-next-line no-shadow
-const ColumnCards = ({ cards, colors, columnId, removeCard }) => (
+const ColumnCards = ({ cards, colors, columnId, onEditCardModal, onRemoveCard }) => (
     <>
         {cards && cards.length
             ? cards
@@ -18,8 +14,9 @@ const ColumnCards = ({ cards, colors, columnId, removeCard }) => (
                   .map((card) => (
                       <ColumnCard
                           key={card.cardId}
-                          onRemoveCard={() => removeCard(columnId, card.cardId)}
-                          backgroundColor={getColorCode(colors, card)}
+                          onRemoveCard={() => onRemoveCard(columnId, card.cardId)}
+                          onEditCardModal={() => onEditCardModal(columnId, card.cardId)}
+                          backgroundColor={getColorCodeByItem(colors, card)}
                           {...card}
                       />
                   ))
@@ -33,7 +30,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    removeCard: (columnId, cardId) => dispatch(removeCard(columnId, cardId)),
+    onRemoveCard: (columnId, cardId) => dispatch(removeCard(columnId, cardId)),
+    onEditCardModal: (columnId, cardId) => dispatch(toggleModal(ModalTypes.ADD_CARD_MODAL_ID, { columnId, cardId })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnCards);
@@ -42,5 +40,6 @@ ColumnCards.propTypes = {
     cards: PropTypes.array.isRequired,
     colors: PropTypes.array.isRequired,
     columnId: PropTypes.string.isRequired,
-    removeCard: PropTypes.func.isRequired,
+    onEditCardModal: PropTypes.func.isRequired,
+    onRemoveCard: PropTypes.func.isRequired,
 };

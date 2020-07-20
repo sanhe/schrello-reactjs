@@ -8,7 +8,9 @@ const ActionTypes = keyMirror({
     REMOVE_COLUMN: null,
     REMOVE_COLUMN_CARDS: null,
     ADD_CARD: null,
+    EDIT_CARD: null,
     REMOVE_CARD: null,
+    TOGGLE_MODAL: null,
 });
 
 export default ActionTypes;

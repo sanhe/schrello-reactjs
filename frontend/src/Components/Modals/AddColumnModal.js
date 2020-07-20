@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label, FormGroup, Form, Input } from "reactstrap";
+import { Button, Label, FormGroup, Form, Input } from "reactstrap";
 import { connect } from "react-redux";
-import { addColumn } from "../../actions/Actions";
+import { addColumn, toggleModal } from "../../actions/Actions";
 import { DEFAULT_CARD_BACKGROUND_COLOR_ID } from "../../store/initialStates";
+import MainModal from "./MainModal";
+import ModalTypes from "../../types/ModalTypes";
 
-const AddColumnModal = ({ buttonLabel, className, onAddColumn, colors, currentBoardId }) => {
-    const [modal, setModal] = useState(false);
+const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, currentBoardId }) => {
+    const onThisToggleModal = () => onToggleModal(ModalTypes.ADD_COLUMN_MODAL_ID);
     const [titleValue, setTitleValue] = useState("");
     const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(DEFAULT_CARD_BACKGROUND_COLOR_ID);
-    const toggle = () => setModal(!modal);
     const titleOnChange = (e) => {
         setTitleValue(e.target.value);
     };
@@ -24,61 +25,51 @@ const AddColumnModal = ({ buttonLabel, className, onAddColumn, colors, currentBo
         );
         setTitleValue("");
         setBackgroundColorIdValue(DEFAULT_CARD_BACKGROUND_COLOR_ID);
-        toggle();
+        onThisToggleModal();
     };
+    const form = (
+        <Form id="addCardForm">
+            <FormGroup>
+                <Label for="columnTitle">Title</Label>
+                <Input
+                    type="text"
+                    id="columnTitle"
+                    value={titleValue}
+                    onChange={titleOnChange}
+                    placeholder="Input column title"
+                />
+            </FormGroup>
+            <FormGroup>
+                <Label for="cardBackgroundColor">Select background color</Label>
+                <Input
+                    type="select"
+                    id="columnBackgroundColor"
+                    onChange={backgroundColorOnChange}
+                    defaultValue={backgroundColorIdValue}
+                >
+                    {colors && colors.length
+                        ? colors.map((color) => (
+                              <option value={color.colorId} key={color.colorId} style={{ background: color.code }}>
+                                  {color.title}
+                              </option>
+                          ))
+                        : "No colors available!"}
+                </Input>
+            </FormGroup>
+        </Form>
+    );
 
     return (
         <div className="add-column">
-            {/* <Button color="success" onClick={toggle}> */}
-            {/*    {buttonLabel} */}
-            {/* </Button> */}
-            <Button onClick={toggle}>{buttonLabel || "+"}</Button>
-            <Modal isOpen={modal} toggle={toggle} className={className}>
-                <ModalHeader toggle={toggle}>Add a card</ModalHeader>
-                <ModalBody>
-                    <Form id="addCardForm">
-                        <FormGroup>
-                            <Label for="cardTitle">Title</Label>
-                            <Input
-                                type="text"
-                                id="columnTitle"
-                                value={titleValue}
-                                onChange={titleOnChange}
-                                placeholder="Input card title"
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label for="cardBackgroundColor">Select background color</Label>
-                            <Input
-                                type="select"
-                                id="columnBackgroundColor"
-                                onChange={backgroundColorOnChange}
-                                defaultValue={backgroundColorIdValue}
-                            >
-                                {colors && colors.length
-                                    ? colors.map((color) => (
-                                          <option
-                                              value={color.colorId}
-                                              key={color.colorId}
-                                              style={{ background: color.code }}
-                                          >
-                                              {color.title}
-                                          </option>
-                                      ))
-                                    : "No colors available!"}
-                            </Input>
-                        </FormGroup>
-                    </Form>
-                </ModalBody>
-                <ModalFooter>
-                    <Button color="primary" onClick={submitForm}>
-                        Submit
-                    </Button>{" "}
-                    <Button color="secondary" onClick={toggle}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </Modal>
+            <Button onClick={onThisToggleModal}>+</Button>
+            <MainModal
+                modalId={ModalTypes.ADD_COLUMN_MODAL_ID}
+                title="Add a column"
+                content={form}
+                className={className}
+                onToggleModal={onThisToggleModal}
+                onSubmitModal={submitForm}
+            />
         </div>
     );
 };
@@ -91,14 +82,15 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     onAddColumn: (title, backgroundColorId, currentBoardId) =>
         dispatch(addColumn(title, backgroundColorId, currentBoardId)),
+    onToggleModal: (modalId) => dispatch(toggleModal(modalId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddColumnModal);
 
 AddColumnModal.propTypes = {
-    buttonLabel: PropTypes.string,
     className: PropTypes.string,
     colors: PropTypes.array.isRequired,
     onAddColumn: PropTypes.func.isRequired,
     currentBoardId: PropTypes.string.isRequired,
+    onToggleModal: PropTypes.func.isRequired,
 };
