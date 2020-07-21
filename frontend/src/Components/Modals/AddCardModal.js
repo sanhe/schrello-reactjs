@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Label, FormGroup, Form, Input } from "reactstrap";
 import { connect } from "react-redux";
+import FormFeedback from "reactstrap/lib/FormFeedback";
 import { addCard, editCard, setFormValueModal, toggleModal } from "../../actions/Actions";
 import MainModal from "./MainModal";
 import ModalTypes from "../../types/ModalTypes";
@@ -16,7 +17,14 @@ const AddCardModal = ({ modalState, className, colors, onAddCard, onEditCard, on
     const cardContent = (card && card.content) || "";
     const cardBackgroundColorId = (card && card.backgroundColorId) || DEFAULT_CARD_BACKGROUND_COLOR_ID;
 
+    const [titleValidationState, setTitleValidationState] = useState();
+    const validateTitle = (e) => {
+        const lettersRex = /^[a-zA-Z]+$/;
+        setTitleValidationState(lettersRex.test(e.target.value) ? "has-success" : "has-danger");
+    };
+
     const titleOnChange = (e) => {
+        validateTitle(e);
         onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, title: e.target.value } });
     };
     const contentOnChange = (e) => {
@@ -27,11 +35,16 @@ const AddCardModal = ({ modalState, className, colors, onAddCard, onEditCard, on
     };
 
     const onThisToggleModal = () => {
+        setTitleValidationState("");
         onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, {});
         onToggleModal(ModalTypes.ADD_CARD_MODAL_ID, { columnId });
     };
 
     const submitForm = () => {
+        if (titleValidationState === "has-danger") {
+            return;
+        }
+
         if (isEdit) {
             onEditCard(
                 columnId,
@@ -50,6 +63,14 @@ const AddCardModal = ({ modalState, className, colors, onAddCard, onEditCard, on
         }
         onThisToggleModal();
     };
+
+    const titleValidationProps = {};
+    if (titleValidationState === "has-success") {
+        titleValidationProps.valid = "valid";
+    } else if (titleValidationState === "has-danger") {
+        titleValidationProps.invalid = "invalid";
+    }
+
     const form = (
         <Form id="addCardForm">
             <FormGroup>
@@ -60,7 +81,11 @@ const AddCardModal = ({ modalState, className, colors, onAddCard, onEditCard, on
                     value={cardTitle}
                     onChange={titleOnChange}
                     placeholder="Input card title"
+                    {...titleValidationProps}
                 />
+                <FormFeedback invalid>
+                    Uh oh! Looks like there is an issue with this title. Please input a correct title.
+                </FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="cardContent">Content</Label>
