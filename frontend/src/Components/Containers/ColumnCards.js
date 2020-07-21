@@ -15,7 +15,7 @@ const ColumnCards = ({ cards, colors, columnId, onEditCardModal, onRemoveCard })
                       <ColumnCard
                           key={card.cardId}
                           onRemoveCard={() => onRemoveCard(columnId, card.cardId)}
-                          onEditCardModal={() => onEditCardModal(columnId, card.cardId)}
+                          onEditCardModal={() => onEditCardModal({ card, isEdit: true })}
                           backgroundColor={getColorCodeByItem(colors, card)}
                           {...card}
                       />
@@ -31,7 +31,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     onRemoveCard: (columnId, cardId) => dispatch(removeCard(columnId, cardId)),
-    onEditCardModal: (columnId, cardId) => dispatch(toggleModal(ModalTypes.ADD_CARD_MODAL_ID, { columnId, cardId })),
+    onEditCardModal: (formData) => dispatch(toggleModal(ModalTypes.ADD_CARD_MODAL_ID, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnCards);

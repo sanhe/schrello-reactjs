@@ -18,10 +18,17 @@ const cardReducer = (state = {}, action) => {
 };
 
 const editCardReducer = (state, action) => {
-    const actionCard = state.find((card) => card.columnId === action.columnId && card.cardId === action.cardId);
-    const otherCards = state.filter((card) => card.columnId !== action.columnId && card.cardId !== action.cardId);
+    const actionCard = state.find(
+        (card) => card.columnId === action.card.columnId && card.cardId === action.card.cardId,
+    );
 
-    return [...otherCards, cardReducer(actionCard, action)];
+    return state.map((card) => {
+        if (card.columnId !== action.card.columnId || card.cardId !== action.card.cardId) {
+            return card;
+        }
+
+        return cardReducer(actionCard, action);
+    });
 };
 
 const cardsReducer = createReducer(initialCardsState, {

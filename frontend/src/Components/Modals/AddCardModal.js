@@ -1,53 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Label, FormGroup, Form, Input } from "reactstrap";
 import { connect } from "react-redux";
-import { addCard, editCard, toggleModal } from "../../actions/Actions";
-import { DEFAULT_CARD_BACKGROUND_COLOR_ID } from "../../store/initialStates";
+import { addCard, editCard, setFormValueModal, toggleModal } from "../../actions/Actions";
 import MainModal from "./MainModal";
 import ModalTypes from "../../types/ModalTypes";
+import { DEFAULT_CARD_BACKGROUND_COLOR_ID } from "../../store/initialStates";
 
-const AddCardModal = ({
-    modalState,
-    className,
-    colors,
-    cards,
-    onAddCard,
-    onEditCard,
-    onToggleModal
-}) => {
+const AddCardModal = ({ modalState, className, colors, onAddCard, onEditCard, onToggleModal, onSetFormValueModal }) => {
     const currentModalState = modalState.find((modal) => modal.modalId === ModalTypes.ADD_CARD_MODAL_ID);
-    const { columnId, cardId } = currentModalState;
-    const card = cards.find((cardData) => cardData.columnId === columnId && cardData.cardId === cardId);
-    const cardTitle = card && card.title;
-    const cardContent = card && card.content;
-    const backgroundColorId = card && card.backgroundColorId;
-
-    const [titleValue, setTitleValue] = useState(cardTitle);
-    const [contentValue, setContentValue] = useState(cardContent);
-    const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(
-        backgroundColorId || DEFAULT_CARD_BACKGROUND_COLOR_ID,
-    );
+    const { card, isEdit } = currentModalState || {};
+    const columnId = (card && card.columnId) || null;
+    const cardId = (card && card.cardId) || null;
+    const cardTitle = (card && card.title) || "";
+    const cardContent = (card && card.content) || "";
+    const cardBackgroundColorId = (card && card.backgroundColorId) || DEFAULT_CARD_BACKGROUND_COLOR_ID;
 
     const titleOnChange = (e) => {
-        setTitleValue(e.target.value);
+        onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, title: e.target.value } });
     };
     const contentOnChange = (e) => {
-        setContentValue(e.target.value);
+        onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, content: e.target.value } });
     };
     const backgroundColorOnChange = (e) => {
-        setBackgroundColorIdValue(e.target.value);
+        onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, backgroundColorId: e.target.value } });
     };
 
     const onThisToggleModal = () => {
-        setTitleValue("");
-        setContentValue("");
-        setBackgroundColorIdValue(DEFAULT_CARD_BACKGROUND_COLOR_ID);
+        onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, {});
         onToggleModal(ModalTypes.ADD_CARD_MODAL_ID, { columnId });
     };
 
     const submitForm = () => {
-        if (card) {
+        if (isEdit) {
             onEditCard(
                 columnId,
                 cardId,
@@ -72,7 +57,7 @@ const AddCardModal = ({
                 <Input
                     type="text"
                     id="cardTitle"
-                    value={cardTitle || titleValue}
+                    value={cardTitle}
                     onChange={titleOnChange}
                     placeholder="Input card title"
                 />
@@ -82,7 +67,7 @@ const AddCardModal = ({
                 <Input
                     type="textarea"
                     id="cardContent"
-                    value={cardContent || contentValue}
+                    value={cardContent}
                     onChange={contentOnChange}
                     placeholder="Input card content"
                 />
@@ -93,7 +78,7 @@ const AddCardModal = ({
                     type="select"
                     id="cardBackgroundColor"
                     onChange={backgroundColorOnChange}
-                    defaultValue={backgroundColorId || backgroundColorIdValue}
+                    defaultValue={cardBackgroundColorId}
                 >
                     {colors && colors.length
                         ? colors.map((color) => (
@@ -124,7 +109,6 @@ const AddCardModal = ({
 const mapStateToProps = (state) => ({
     colors: state.colors,
     modalState: state.modal,
-    cards: state.cards,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -133,6 +117,7 @@ const mapDispatchToProps = (dispatch) => ({
     onEditCard: (columnId, cardId, title, content, backgroundColorId) =>
         dispatch(editCard(columnId, cardId, title, content, backgroundColorId)),
     onToggleModal: (modalId, additionalData) => dispatch(toggleModal(modalId, additionalData)),
+    onSetFormValueModal: (modalId, formData) => dispatch(setFormValueModal(modalId, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCardModal);
@@ -145,10 +130,10 @@ AddCardModal.defaultProps = {
 AddCardModal.propTypes = {
     columnId: PropTypes.string,
     modalState: PropTypes.array.isRequired,
-    cards: PropTypes.array.isRequired,
     className: PropTypes.string.isRequired,
     colors: PropTypes.array.isRequired,
     onAddCard: PropTypes.func.isRequired,
     onEditCard: PropTypes.func.isRequired,
     onToggleModal: PropTypes.func.isRequired,
+    onSetFormValueModal: PropTypes.func.isRequired,
 };

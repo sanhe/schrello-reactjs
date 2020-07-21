@@ -74,3 +74,19 @@ export const toggleModal = (modalId, additionalData = {}) => ({
         additionalData,
     },
 });
+
+export const setFormValueModal = (modalId, additionalData = {}) => ({
+    type: ActionTypes.SET_FORM_VALUE_MODAL,
+    modal: {
+        modalId,
+        additionalData,
+    },
+});
+
+export const toggleAddCardModal = (modalId, formData = {}) => ({
+    type: ActionTypes.TOGGLE_MODAL,
+    modal: {
+        modalId,
+        formData,
+    },
+});

@@ -34,7 +34,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     removeColumn: (columnId) => dispatchRemoveColumn(dispatch, columnId),
-    onAddCardModal: (modalId, columnId) => dispatch(toggleModal(modalId, { columnId })),
+    onAddCardModal: (modalId, columnId) => dispatch(toggleModal(modalId, { card: { columnId } })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Columns);

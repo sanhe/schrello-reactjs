@@ -11,6 +11,7 @@ const ActionTypes = keyMirror({
     EDIT_CARD: null,
     REMOVE_CARD: null,
     TOGGLE_MODAL: null,
+    SET_FORM_VALUE_MODAL: null,
 });
 
 export default ActionTypes;
