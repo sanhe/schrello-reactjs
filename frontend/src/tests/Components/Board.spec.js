@@ -5,12 +5,10 @@ import Board from "../../Components/Board";
 import Columns from "../../Components/Containers/Columns";
 
 describe("Board Component", () => {
-    it("renders correctly with shallow", () => {
-        const board = shallow(<Board />);
-        const columns = <Columns />;
+    const board = shallow(<Board />);
 
+    it("renders correctly with shallow", () => {
+        const columns = <Columns />;
         expect(board.contains(columns)).toEqual(true);
     });
-
-
 });
