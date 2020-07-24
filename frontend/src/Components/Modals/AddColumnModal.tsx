@@ -1,26 +1,39 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Button, Label, FormGroup, Form, Input } from "reactstrap";
 import { connect } from "react-redux";
 import { addColumn, toggleModal } from "../../actions/Actions";
 import { DEFAULT_CARD_BACKGROUND_COLOR_ID } from "../../store/initialStates";
 import MainModal from "./MainModal";
 import ModalTypes from "../../types/ModalTypes";
+import { ColorInterface } from "../Color";
 
-const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, currentBoardId }) => {
+interface AddColumnModalProps {
+    className?: string;
+    colors: Array<ColorInterface>;
+    onAddColumn(title: string, backgroundColorId: string, currentBoardId: string): void;
+    currentBoardId: string;
+    onToggleModal(modalId: string): void;
+}
+
+const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, currentBoardId }: AddColumnModalProps) => {
     const onThisToggleModal = () => onToggleModal(ModalTypes.ADD_COLUMN_MODAL_ID);
     const [titleValue, setTitleValue] = useState("");
     const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(DEFAULT_CARD_BACKGROUND_COLOR_ID);
-    const titleOnChange = (e) => {
+    const titleOnChange = (e: any) => {
         setTitleValue(e.target.value);
     };
-    const backgroundColorOnChange = (e) => {
+    const backgroundColorOnChange = (e: any) => {
         setBackgroundColorIdValue(e.target.value);
     };
     const submitForm = () => {
+        // @ts-ignore
+        const columnTitleValue = document.getElementById("columnTitle").value;
+        // @ts-ignore
+        const columnBackgroundColor = document.getElementById("columnBackgroundColor").value;
+
         onAddColumn(
-            document.getElementById("columnTitle").value,
-            document.getElementById("columnBackgroundColor").value,
+            columnTitleValue,
+            columnBackgroundColor,
             currentBoardId,
         );
         setTitleValue("");
@@ -74,23 +87,15 @@ const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, current
     );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     colors: state.colors,
     currentBoardId: state.currentBoardId,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    onAddColumn: (title, backgroundColorId, currentBoardId) =>
+const mapDispatchToProps = (dispatch: any) => ({
+    onAddColumn: (title: string, backgroundColorId: string, currentBoardId: string) =>
         dispatch(addColumn(title, backgroundColorId, currentBoardId)),
-    onToggleModal: (modalId) => dispatch(toggleModal(modalId)),
+    onToggleModal: (modalId: string) => dispatch(toggleModal(modalId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddColumnModal);
-
-AddColumnModal.propTypes = {
-    className: PropTypes.string,
-    colors: PropTypes.array.isRequired,
-    onAddColumn: PropTypes.func.isRequired,
-    currentBoardId: PropTypes.string.isRequired,
-    onToggleModal: PropTypes.func.isRequired,
-};

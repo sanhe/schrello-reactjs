@@ -5,10 +5,10 @@ import { initialModalState } from "../store/initialStates";
 const modalReducer = createReducer(initialModalState, {
     [ActionTypes.TOGGLE_MODAL]: (state, action) => {
         const otherModals = state.filter((modal) => modal.modalId !== action.modal.modalId);
-        let actionModal = state.find((modal) => modal.modalId === action.modal.modalId);
-        actionModal = {
-            modalId: actionModal.modalId,
-            isOpen: actionModal.isOpen,
+        const currentActionModal = state.find((modal) => modal.modalId === action.modal.modalId);
+        const actionModal = {
+            modalId: currentActionModal && currentActionModal.modalId,
+            isOpen: currentActionModal && currentActionModal.isOpen,
         };
 
         return [

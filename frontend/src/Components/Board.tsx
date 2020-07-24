@@ -3,8 +3,10 @@ import { Row } from "reactstrap";
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
 
-class Board extends React.Component {
-    constructor(props) {
+interface BoardProps {}
+
+class Board extends React.Component<BoardProps, any> {
+    constructor(props: BoardProps) {
         super(props);
         this.state = {
             loading: true,
@@ -15,7 +17,7 @@ class Board extends React.Component {
         this.setLoading(false);
     }
 
-    setLoading(isLoading) {
+    setLoading(isLoading: boolean) {
         this.setState(() => ({
             loading: isLoading,
         }));

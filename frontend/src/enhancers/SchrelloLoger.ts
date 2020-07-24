@@ -1,3 +1,4 @@
+// @ts-ignore
 const SchrelloLoger = () => (next) => (action) => {
     const { type, ...otherParams } = action;
 

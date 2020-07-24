@@ -4,7 +4,6 @@ import { Container } from "reactstrap";
 import NavBar from "./NavBar";
 import "../styles/App.css";
 import About from "./About";
-import data from "../api/data.json";
 import Board from "./Board";
 
 const App = () => (
@@ -12,9 +11,9 @@ const App = () => (
         <NavBar />
         <Container fluid>
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Route exact path="/" render={(props) => <Board data={data} {...props} />} />
+            <Route exact path="/" render={(props: any) => <Board {...props} />} />
             {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-            <Route exact path="/about" render={(props) => <About {...props} />} />
+            <Route exact path="/about" render={(routeProps: any) => <About {...routeProps} />} />
         </Container>
     </Router>
 );

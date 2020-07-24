@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import ActionTypes from "../types/ActionTypes";
 import { initialCardsState } from "../store/initialStates";
 
-const cardReducer = (state = {}, action) => {
+const cardReducer = (state: any = {}, action: any) => {
     const { card } = action;
     switch (action.type) {
         case ActionTypes.EDIT_CARD:
@@ -17,12 +17,12 @@ const cardReducer = (state = {}, action) => {
     }
 };
 
-const editCardReducer = (state, action) => {
+const editCardReducer = (state: any, action: any) => {
     const actionCard = state.find(
-        (card) => card.columnId === action.card.columnId && card.cardId === action.card.cardId,
+        (card: any) => card.columnId === action.card.columnId && card.cardId === action.card.cardId,
     );
 
-    return state.map((card) => {
+    return state.map((card: any) => {
         if (card.columnId !== action.card.columnId || card.cardId !== action.card.cardId) {
             return card;
         }

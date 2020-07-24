@@ -1,10 +1,17 @@
 import React from "react";
 import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
-import PropTypes from "prop-types";
 import { textTruncate } from "./Text";
 import { CARD_TEXT_MAX_LENGTH } from "../store/initialStates";
 
-const ColumnCard = ({ title, content, backgroundColor, onEditCardModal, onRemoveCard }) => (
+interface ColumnCardProps {
+    title: string;
+    content: string;
+    backgroundColor: string;
+    onEditCardModal(): void;
+    onRemoveCard(): void;
+}
+
+const ColumnCard = ({ title, content, backgroundColor, onEditCardModal, onRemoveCard }: ColumnCardProps) => (
     <Card body inverse style={{ backgroundColor }}>
         <CardBody>
             <CardTitle>{title}</CardTitle>
@@ -20,11 +27,3 @@ const ColumnCard = ({ title, content, backgroundColor, onEditCardModal, onRemove
 );
 
 export default ColumnCard;
-
-ColumnCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    backgroundColor: PropTypes.string.isRequired,
-    onEditCardModal: PropTypes.func.isRequired,
-    onRemoveCard: PropTypes.func.isRequired,
-};

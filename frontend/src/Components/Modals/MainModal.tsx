@@ -1,11 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { connect } from "react-redux";
 
-const getStateByModalId = (modalState, modalId) => modalState.find((modal) => modal.modalId === modalId);
+interface MainModalProps {
+    modalId: string;
+    title: string;
+    content: any;
+    className?: string;
+    onSubmitModal(): void;
+    onToggleModal(): void;
+    modalState: any;
+}
 
-const MainModal = ({ modalId, title, content, className, onSubmitModal, onToggleModal, modalState }) => {
+const getStateByModalId = (modalState: any, modalId: string) =>
+    modalState.find((modal: any) => modal.modalId === modalId);
+
+const MainModal = ({
+    modalId,
+    title,
+    content,
+    className,
+    onSubmitModal,
+    onToggleModal,
+    modalState,
+}: MainModalProps) => {
     const modal = getStateByModalId(modalState, modalId);
 
     return (
@@ -26,18 +44,8 @@ const MainModal = ({ modalId, title, content, className, onSubmitModal, onToggle
     );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     modalState: state.modal,
 });
 
 export default connect(mapStateToProps)(MainModal);
-
-MainModal.propTypes = {
-    modalId: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    content: PropTypes.any.isRequired,
-    className: PropTypes.string,
-    onSubmitModal: PropTypes.func.isRequired,
-    onToggleModal: PropTypes.func.isRequired,
-    modalState: PropTypes.array.isRequired,
-};

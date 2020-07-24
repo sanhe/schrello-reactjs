@@ -14,7 +14,6 @@ export const initialColors = [
         colorId: "2",
         title: "Black",
         code: "#000000",
-        isDefault: true,
     },
     {
         colorId: "3",

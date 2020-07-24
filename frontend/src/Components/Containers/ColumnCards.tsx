@@ -6,7 +6,15 @@ import { removeCard, toggleModal } from "../../actions/Actions";
 import { getColorCodeByItem } from "../Color";
 import ModalTypes from "../../types/ModalTypes";
 
-const ColumnCards = ({ cards, colors, columnId, onEditCardModal, onRemoveCard }) => (
+interface ColumnCardsProps {
+    cards: Array<any>;
+    colors: Array<any>;
+    columnId: string;
+    onEditCardModal(formData: any): void;
+    onRemoveCard(columnId: string, cardId: string): void;
+}
+
+const ColumnCards = ({ cards, colors, columnId, onEditCardModal, onRemoveCard }: ColumnCardsProps) => (
     <>
         {cards && cards.length
             ? cards
@@ -16,7 +24,7 @@ const ColumnCards = ({ cards, colors, columnId, onEditCardModal, onRemoveCard })
                           key={card.cardId}
                           onRemoveCard={() => onRemoveCard(columnId, card.cardId)}
                           onEditCardModal={() => onEditCardModal({ card, isEdit: true })}
-                          backgroundColor={getColorCodeByItem(colors, card)}
+                          backgroundColor={getColorCodeByItem({ colors, item: card })}
                           {...card}
                       />
                   ))
@@ -24,22 +32,14 @@ const ColumnCards = ({ cards, colors, columnId, onEditCardModal, onRemoveCard })
     </>
 );
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     cards: state.cards,
     colors: state.colors,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    onRemoveCard: (columnId, cardId) => dispatch(removeCard(columnId, cardId)),
-    onEditCardModal: (formData) => dispatch(toggleModal(ModalTypes.ADD_CARD_MODAL_ID, formData)),
+const mapDispatchToProps = (dispatch: any) => ({
+    onRemoveCard: (columnId: string, cardId: string) => dispatch(removeCard(columnId, cardId)),
+    onEditCardModal: (formData: any) => dispatch(toggleModal(ModalTypes.ADD_CARD_MODAL_ID, formData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ColumnCards);
-
-ColumnCards.propTypes = {
-    cards: PropTypes.array.isRequired,
-    colors: PropTypes.array.isRequired,
-    columnId: PropTypes.string.isRequired,
-    onEditCardModal: PropTypes.func.isRequired,
-    onRemoveCard: PropTypes.func.isRequired,
-};

@@ -2,7 +2,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import ActionTypes from "../types/ActionTypes";
 import { initialColumnsState } from "../store/initialStates";
 
-const columnReducer = (state = {}, action) => {
+const columnReducer = (state: any = {}, action: any) => {
     const { column } = action;
     switch (action.type) {
         case ActionTypes.ADD_COLUMN: {
