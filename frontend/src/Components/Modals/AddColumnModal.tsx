@@ -31,17 +31,13 @@ const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, current
         // @ts-ignore
         const columnBackgroundColor = document.getElementById("columnBackgroundColor").value;
 
-        onAddColumn(
-            columnTitleValue,
-            columnBackgroundColor,
-            currentBoardId,
-        );
+        onAddColumn(columnTitleValue, columnBackgroundColor, currentBoardId);
         setTitleValue("");
         setBackgroundColorIdValue(DEFAULT_CARD_BACKGROUND_COLOR_ID);
         onThisToggleModal();
     };
     const form = (
-        <Form id="addCardForm">
+        <Form id="addColumnForm">
             <FormGroup>
                 <Label for="columnTitle">Title</Label>
                 <Input

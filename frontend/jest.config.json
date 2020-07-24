@@ -1,6 +1,6 @@
 {
-  "testRegex": "((\\.|/*.)(test|spec))\\.js?$",
+  "testRegex": "((\\.|/*.)(test|spec))\\.(js|ts|tsx)?$",
   "setupFilesAfterEnv": [
-    "<rootDir>/jest.setup.js"
+    "<rootDir>/jest.setup.tsx"
   ]
 }
