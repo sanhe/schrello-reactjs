@@ -6,7 +6,6 @@ import { addCard, editCard, setFormValueModal, toggleModal } from "../../actions
 import MainModal from "./MainModal";
 import ModalTypes from "../../types/ModalTypes";
 import { DEFAULT_CARD_BACKGROUND_COLOR_ID } from "../../store/initialStates";
-import { string } from "prop-types";
 
 interface AddCardModalProps {
     modalState: Array<any>;
@@ -91,7 +90,7 @@ const AddCardModal = ({
                     valid={titleValidationState === "has-success"}
                     invalid={titleValidationState === "has-danger"}
                 />
-                <FormFeedback invalid>
+                <FormFeedback valid={titleValidationState === "has-success"}>
                     Uh oh! Looks like there is an issue with this title. Please input a correct title.
                 </FormFeedback>
             </FormGroup>
@@ -129,7 +128,7 @@ const AddCardModal = ({
         <div className="add-card">
             <MainModal
                 modalId={ModalTypes.ADD_CARD_MODAL_ID}
-                title="Add a card"
+                title={isEdit ? "Edit a card" : "Add a card"}
                 content={form}
                 className={className}
                 onToggleModal={() => onThisToggleModal()}

@@ -16,7 +16,6 @@ interface AddColumnModalProps {
 }
 
 const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, currentBoardId }: AddColumnModalProps) => {
-    const onThisToggleModal = () => onToggleModal(ModalTypes.ADD_COLUMN_MODAL_ID);
     const [titleValue, setTitleValue] = useState("");
     const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(DEFAULT_CARD_BACKGROUND_COLOR_ID);
     const titleOnChange = (e: any) => {
@@ -25,6 +24,11 @@ const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, current
     const backgroundColorOnChange = (e: any) => {
         setBackgroundColorIdValue(e.target.value);
     };
+    const onThisToggleModal = () => {
+        setTitleValue("");
+        setBackgroundColorIdValue(DEFAULT_CARD_BACKGROUND_COLOR_ID);
+        onToggleModal(ModalTypes.ADD_COLUMN_MODAL_ID);
+    };
     const submitForm = () => {
         // @ts-ignore
         const columnTitleValue = document.getElementById("columnTitle").value;
@@ -32,8 +36,6 @@ const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, current
         const columnBackgroundColor = document.getElementById("columnBackgroundColor").value;
 
         onAddColumn(columnTitleValue, columnBackgroundColor, currentBoardId);
-        setTitleValue("");
-        setBackgroundColorIdValue(DEFAULT_CARD_BACKGROUND_COLOR_ID);
         onThisToggleModal();
     };
     const form = (
