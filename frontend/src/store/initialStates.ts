@@ -39,7 +39,13 @@ export const initialColors = [
 
 export const DEFAULT_CARD_BACKGROUND_COLOR_ID = "1";
 
-export const initialBoardsState = [
+export interface BoardInterface {
+    boardId: string,
+    title: string,
+    timestamp: string,
+}
+
+export const initialBoardsState: BoardInterface[] = [
     {
         boardId: DEFAULT_BOARD_ID,
         title: "Default Board",
@@ -47,7 +53,15 @@ export const initialBoardsState = [
     },
 ];
 
-export const initialColumnsState = [
+export interface ColumnInterface {
+    columnId: string,
+    boardId: string,
+    title: string,
+    backgroundColorId: string,
+    timestamp: string,
+}
+
+export const initialColumnsState: ColumnInterface[] = [
     {
         columnId: "1",
         boardId: DEFAULT_BOARD_ID,
@@ -71,7 +85,16 @@ export const initialColumnsState = [
     },
 ];
 
-export const initialCardsState = [
+export interface CardInterface {
+    cardId: string;
+    columnId: string,
+    title: string,
+    content: string,
+    backgroundColorId: string,
+    timestamp: string,
+}
+
+export const initialCardsState: CardInterface[] = [
     {
         cardId: "1",
         columnId: "1",

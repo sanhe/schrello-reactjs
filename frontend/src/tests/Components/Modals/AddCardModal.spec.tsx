@@ -1,9 +1,9 @@
 import React from "react";
-import { mount } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import "jest-enzyme";
 import { Input, Modal } from "reactstrap";
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+import configureStore, { MockStoreEnhanced } from "redux-mock-store";
 import MainModal from "../../../Components/Modals/MainModal";
 import AddCardModal from "../../../Components/Modals/AddCardModal";
 import ModalTypes from "../../../types/ModalTypes";
@@ -12,8 +12,8 @@ import { setFormValueModal } from "../../../actions/Actions";
 const mockStore = configureStore([]);
 
 describe("AddCardModal", () => {
-    let store;
-    let component;
+    let store: MockStoreEnhanced<unknown, {}>;
+    let component: ReactWrapper<any, React.Component["state"], React.Component>;
 
     beforeEach(() => {
         store = mockStore({

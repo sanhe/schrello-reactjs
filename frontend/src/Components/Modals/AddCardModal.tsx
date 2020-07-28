@@ -11,10 +11,10 @@ interface AddCardModalProps {
     modalState: Array<any>;
     className: string;
     colors: Array<any>;
-    onAddCard(columnId: string, title?: string, content?: string, backgroundColorId?: string): void;
-    onEditCard(columnId: string, cardId: string, title?: string, content?: string, backgroundColorId?: string): void;
-    onToggleModal(modalId: string, additionalData: any): void;
-    onSetFormValueModal(modalId: string, additionalData: any): void;
+    onAddCard: (columnId: string, title: string, content: string, backgroundColorId: string) => void;
+    onEditCard: (columnId: string, cardId: string, title: string, content: string, backgroundColorId: string) => void;
+    onToggleModal: (modalId: string, additionalData: any) => void;
+    onSetFormValueModal: (modalId: string, additionalData: any) => void;
 }
 
 const AddCardModal = ({
@@ -34,20 +34,20 @@ const AddCardModal = ({
     const cardContent = (card && card.content) || "";
     const cardBackgroundColorId = (card && card.backgroundColorId) || DEFAULT_CARD_BACKGROUND_COLOR_ID;
 
-    const [titleValidationState, setTitleValidationState] = useState<string>();
-    const validateTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const [titleValidationState, setTitleValidationState] = useState<"" | "has-success" | "has-danger">();
+    const validateTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const lettersRex = /^[a-zA-Z]+$/;
         setTitleValidationState(lettersRex.test(e.currentTarget.value) ? "has-success" : "has-danger");
     };
 
-    const titleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const titleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         validateTitle(e);
         onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, title: e.target.value } });
     };
-    const contentOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const contentOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, content: e.target.value } });
     };
-    const backgroundColorOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const backgroundColorOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         onSetFormValueModal(ModalTypes.ADD_CARD_MODAL_ID, { card: { ...card, backgroundColorId: e.target.value } });
     };
 
@@ -62,12 +62,10 @@ const AddCardModal = ({
             return;
         }
 
-        // @ts-ignore
-        const cardTitleValue: string = document.getElementById("cardTitle").value;
-        // @ts-ignore
-        const cardContentValue: string = document.getElementById("cardContent").value;
-        // @ts-ignore
-        const cardBackgroundColorValue: string = document.getElementById("cardBackgroundColor").value;
+        const cardTitleValue: string = (document.getElementById("cardTitle") as HTMLInputElement).value;
+        const cardContentValue: string = (document.getElementById("cardContent") as HTMLInputElement).value;
+        const cardBackgroundColorValue: string = (document.getElementById("cardBackgroundColor") as HTMLInputElement)
+            .value;
 
         if (isEdit) {
             onEditCard(columnId, cardId, cardTitleValue, cardContentValue, cardBackgroundColorValue);
@@ -76,6 +74,11 @@ const AddCardModal = ({
         }
         onThisToggleModal();
     };
+
+    const titleFeedback =
+        titleValidationState === "has-success"
+            ? "This is correct title."
+            : "Uh oh! Looks like there is an issue with this title. Please input a correct title.";
 
     const form = (
         <Form id="addCardForm">
@@ -90,9 +93,7 @@ const AddCardModal = ({
                     valid={titleValidationState === "has-success"}
                     invalid={titleValidationState === "has-danger"}
                 />
-                <FormFeedback valid={titleValidationState === "has-success"}>
-                    Uh oh! Looks like there is an issue with this title. Please input a correct title.
-                </FormFeedback>
+                <FormFeedback valid={titleValidationState === "has-success"}>{titleFeedback}</FormFeedback>
             </FormGroup>
             <FormGroup>
                 <Label for="cardContent">Content</Label>

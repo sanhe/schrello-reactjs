@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button } from '@material-ui/core';
 import { connect } from "react-redux";
 
 interface MainModalProps {
@@ -7,15 +8,15 @@ interface MainModalProps {
     title: string;
     content: any;
     className?: string;
-    onSubmitModal(): void;
-    onToggleModal(): void;
+    onSubmitModal: () => void;
+    onToggleModal: () => void;
     modalState: any;
 }
 
 const getStateByModalId = (modalState: any, modalId: string) =>
     modalState.find((modal: any) => modal.modalId === modalId);
 
-const MainModal = ({
+const MainModal: React.FC<MainModalProps> = ({
     modalId,
     title,
     content,

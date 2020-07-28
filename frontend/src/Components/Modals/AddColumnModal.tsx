@@ -8,20 +8,24 @@ import ModalTypes from "../../types/ModalTypes";
 import { ColorInterface } from "../Color";
 
 interface AddColumnModalProps {
-    className?: string;
     colors: Array<ColorInterface>;
-    onAddColumn(title: string, backgroundColorId: string, currentBoardId: string): void;
+    onAddColumn: (title: string, backgroundColorId: string, currentBoardId: string) => void;
     currentBoardId: string;
-    onToggleModal(modalId: string): void;
+    onToggleModal: (modalId: string) => void;
+    className?: string;
 }
 
-const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, currentBoardId }: AddColumnModalProps) => {
+const defaultProps: { className: string } = {
+    className: "success",
+};
+
+const AddColumnModal = ({ onAddColumn, colors, onToggleModal, currentBoardId, className }: AddColumnModalProps) => {
     const [titleValue, setTitleValue] = useState("");
     const [backgroundColorIdValue, setBackgroundColorIdValue] = useState(DEFAULT_CARD_BACKGROUND_COLOR_ID);
-    const titleOnChange = (e: any) => {
+    const titleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setTitleValue(e.target.value);
     };
-    const backgroundColorOnChange = (e: any) => {
+    const backgroundColorOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setBackgroundColorIdValue(e.target.value);
     };
     const onThisToggleModal = () => {
@@ -30,10 +34,8 @@ const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, current
         onToggleModal(ModalTypes.ADD_COLUMN_MODAL_ID);
     };
     const submitForm = () => {
-        // @ts-ignore
-        const columnTitleValue = document.getElementById("columnTitle").value;
-        // @ts-ignore
-        const columnBackgroundColor = document.getElementById("columnBackgroundColor").value;
+        const columnTitleValue = (document.getElementById("columnTitle") as HTMLInputElement).value;
+        const columnBackgroundColor = (document.getElementById("columnBackgroundColor") as HTMLInputElement).value;
 
         onAddColumn(columnTitleValue, columnBackgroundColor, currentBoardId);
         onThisToggleModal();
@@ -84,6 +86,8 @@ const AddColumnModal = ({ className, onAddColumn, colors, onToggleModal, current
         </div>
     );
 };
+
+AddColumnModal.defaultProps = defaultProps;
 
 const mapStateToProps = (state: any) => ({
     colors: state.colors,

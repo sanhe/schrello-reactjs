@@ -6,19 +6,20 @@ import { getColorCodeByItem } from "../Color";
 import AddCardModal from "../Modals/AddCardModal";
 import { toggleModal } from "../../actions/Actions";
 import ModalTypes from "../../types/ModalTypes";
+import { ColumnInterface } from "../../store/initialStates";
 
 interface ColumnsProps {
     columns: Array<any>;
     colors: Array<any>;
-    onRemoveColumn(columnId: string): void;
-    onAddCardModal(modalId: string, columnId: string): void;
+    onRemoveColumn: (columnId: string) => void;
+    onAddCardModal: (modalId: string, columnId: string) => void;
 }
 
 const Columns = ({ columns, colors, onRemoveColumn, onAddCardModal }: ColumnsProps) => (
     <>
         <AddCardModal className="success" />
         {columns && columns.length
-            ? columns.map((column) => (
+            ? columns.map((column: ColumnInterface) => (
                   <Column
                       key={column.columnId}
                       columnId={column.columnId}

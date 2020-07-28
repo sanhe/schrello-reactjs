@@ -3,9 +3,12 @@ import { Row } from "reactstrap";
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
 
-interface BoardProps {}
+type BoardProps = {};
+type BoardState = {
+    loading: boolean;
+};
 
-class Board extends React.Component<BoardProps, any> {
+class Board extends React.Component<BoardProps, BoardState> {
     constructor(props: BoardProps) {
         super(props);
         this.state = {
@@ -24,10 +27,11 @@ class Board extends React.Component<BoardProps, any> {
     }
 
     render() {
+        const { loading } = this.state;
+
         return (
             <>
-                {/* eslint-disable-next-line react/destructuring-assignment */}
-                {this.state.loading && <Loader />}
+                {loading && <Loader />}
                 <Row>
                     <Columns />
                 </Row>

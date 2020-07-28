@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import ActionTypes from "../types/ActionTypes";
-import { initialCardsState } from "../store/initialStates";
+import { CardInterface, initialCardsState } from "../store/initialStates";
 
 const cardReducer = (state: any = {}, action: any) => {
     const { card } = action;
@@ -19,10 +19,10 @@ const cardReducer = (state: any = {}, action: any) => {
 
 const editCardReducer = (state: any, action: any) => {
     const actionCard = state.find(
-        (card: any) => card.columnId === action.card.columnId && card.cardId === action.card.cardId,
+        (card: CardInterface) => card.columnId === action.card.columnId && card.cardId === action.card.cardId,
     );
 
-    return state.map((card: any) => {
+    return state.map((card: CardInterface) => {
         if (card.columnId !== action.card.columnId || card.cardId !== action.card.cardId) {
             return card;
         }
@@ -35,8 +35,8 @@ const cardsReducer = createReducer(initialCardsState, {
     [ActionTypes.ADD_CARD]: (state, action) => [...state, cardReducer({}, action)],
     [ActionTypes.EDIT_CARD]: (state, action) => editCardReducer(state, action),
     [ActionTypes.REMOVE_CARD]: (state, action) =>
-        state.filter((card) => card.columnId !== action.columnId || card.cardId !== action.cardId),
-    [ActionTypes.REMOVE_COLUMN_CARDS]: (state, action) => state.filter((card) => card.columnId !== action.columnId),
+        state.filter((card: CardInterface) => card.columnId !== action.columnId || card.cardId !== action.cardId),
+    [ActionTypes.REMOVE_COLUMN_CARDS]: (state, action) => state.filter((card: CardInterface) => card.columnId !== action.columnId),
 });
 
 export default cardsReducer;

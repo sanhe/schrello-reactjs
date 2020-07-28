@@ -32,8 +32,12 @@ body {
     margin-bottom: 10px;
 }
 
-.card-body .btn {
-    margin-right: 10px;
+.card-body {
+    padding: 0.5rem;
+}
+
+.card-body .card-title button {
+    float: right;
 }
 
 /* Loader */

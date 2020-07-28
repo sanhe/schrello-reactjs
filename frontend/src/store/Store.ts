@@ -20,3 +20,5 @@ const store = configureStore({
 });
 
 export default store;
+
+export type SchrelloDispatch = typeof store.dispatch;
