@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 interface MainModalProps {
     modalId: string;
-    // title: string;
+    title: string;
     content: any;
     onSubmitModal: () => void;
     onToggleModal: () => void;

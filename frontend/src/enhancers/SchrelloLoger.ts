@@ -1,5 +1,4 @@
-// @ts-ignore
-const SchrelloLoger = () => (next) => (action) => {
+const SchrelloLoger = () => (next: any) => (action: any) => {
     const { type, ...otherParams } = action;
 
     console.group("Schrello log");
