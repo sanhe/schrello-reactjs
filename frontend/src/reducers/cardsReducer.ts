@@ -36,7 +36,8 @@ const cardsReducer = createReducer(initialCardsState, {
     [ActionTypes.EDIT_CARD]: (state, action) => editCardReducer(state, action),
     [ActionTypes.REMOVE_CARD]: (state, action) =>
         state.filter((card: CardInterface) => card.columnId !== action.columnId || card.cardId !== action.cardId),
-    [ActionTypes.REMOVE_COLUMN_CARDS]: (state, action) => state.filter((card: CardInterface) => card.columnId !== action.columnId),
+    [ActionTypes.REMOVE_COLUMN_CARDS]: (state, action) =>
+        state.filter((card: CardInterface) => card.columnId !== action.columnId),
 });
 
 export default cardsReducer;
