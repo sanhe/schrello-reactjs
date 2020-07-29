@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardText, CardBody, CardTitle } from "reactstrap";
-import { Button, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 import { textTruncate } from "./Text";
 import { CARD_TEXT_MAX_LENGTH } from "../store/initialStates";
 import DeleteIcon from "@material-ui/icons/Delete";
