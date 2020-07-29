@@ -1,6 +1,17 @@
 version: '3'
 
 services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 4690:5000
+    volumes:
+      - ./backend/src:/usr/src/app/src
+      - ./backend/node_modules:/usr/src/app/node_modules
+    working_dir: /usr/src/app
+
   frontend:
     build:
       context: ./frontend

@@ -5,25 +5,25 @@ import { connect } from "react-redux";
 
 interface MainModalProps {
     modalId: string;
-    title: string;
+    // title: string;
     content: any;
-    className?: string;
     onSubmitModal: () => void;
     onToggleModal: () => void;
-    modalState: any;
+    modalState: Array<any>;
+    className?: string;
 }
 
-const getStateByModalId = (modalState: any, modalId: string) =>
+const getStateByModalId = (modalState: Array<any>, modalId: string) =>
     modalState.find((modal: any) => modal.modalId === modalId);
 
 const MainModal: React.FC<MainModalProps> = ({
     modalId,
     title,
     content,
-    className,
     onSubmitModal,
     onToggleModal,
     modalState,
+    className,
 }: MainModalProps) => {
     const modal = getStateByModalId(modalState, modalId);
 
