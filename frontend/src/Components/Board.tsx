@@ -41,17 +41,6 @@ class Board extends React.Component<BoardProps, BoardState> {
         this.setLoading(false);
     }
 
-    // Retrieves the list of items from the Express app
-    getList = () => {
-        // fetch(`${apiUrl}/api/users/all`)
-        fetch(`/api/users/all`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((list) => this.setState({ list }))
-        ;
-    };
-
     setLoading(isLoading: boolean) {
         this.setState(() => ({
             loading: isLoading,

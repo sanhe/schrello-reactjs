@@ -15,5 +15,28 @@
       "email": "jsmith@yahoo.com",
       "id": 357437875835
     }
+  ],
+  "columns": [
+    {
+      "columnId": 1,
+      "boardId": "boardId1",
+      "title": "Default column",
+      "backgroundColorId": "1",
+      "timestamp": "Wed Jul 29 2020 16:28:52 GMT+0300"
+    },
+    {
+      "columnId": 2,
+      "boardId": "boardId1",
+      "title": "Second column",
+      "backgroundColorId": "1",
+      "timestamp": "Wed Jul 29 2020 16:28:52 GMT+0300"
+    },
+    {
+      "columnId": 3,
+      "boardId": "boardId1",
+      "title": "Second column",
+      "backgroundColorId": "1",
+      "timestamp": "Wed Jul 29 2020 16:28:52 GMT+0300"
+    }
   ]
 }

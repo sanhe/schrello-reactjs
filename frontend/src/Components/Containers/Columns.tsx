@@ -19,16 +19,18 @@ const Columns = ({ columns, colors, onRemoveColumn, onAddCardModal }: ColumnsPro
     <>
         <AddCardModal className="success" />
         {columns && columns.length
-            ? columns.map((column: ColumnInterface) => (
-                  <Column
-                      key={column.columnId}
-                      columnId={column.columnId}
-                      title={column.title}
-                      backgroundColor={getColorCodeByItem({ colors, item: column })}
-                      onRemoveColumn={() => onRemoveColumn(column.columnId)}
-                      onAddCardModal={() => onAddCardModal(ModalTypes.ADD_CARD_MODAL_ID, column.columnId)}
-                  />
-              ))
+            ? columns.map((column: ColumnInterface) => {
+                  return (
+                      <Column
+                          key={column.columnId}
+                          columnId={column.columnId}
+                          title={column.title}
+                          backgroundColor={getColorCodeByItem({ colors, item: column })}
+                          onRemoveColumn={() => onRemoveColumn(column.columnId)}
+                          onAddCardModal={() => onAddCardModal(ModalTypes.ADD_CARD_MODAL_ID, column.columnId)}
+                      />
+                  );
+              })
             : "No columns yet!"}
     </>
 );
