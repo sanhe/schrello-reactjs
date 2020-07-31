@@ -9,7 +9,7 @@ const NavBar = () => (
             <Nav navbar>
                 <NavItem>
                     <RouterNavLink to="/" className="nav-link" exact>
-                        Schrello
+                        {process.env.REACT_APP_SCHRELLO_WEBSITE_TITLE}
                     </RouterNavLink>
                 </NavItem>
             </Nav>

@@ -6,6 +6,8 @@ FROM node:current-alpine
 # Becomes more relevant when using Docker Compose later
 WORKDIR /usr/src/app
 
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
 # Copies package.json and package-lock.json to Docker environment
 COPY package*.json ./
 
