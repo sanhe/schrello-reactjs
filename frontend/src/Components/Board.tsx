@@ -4,20 +4,22 @@ import axios from "axios";
 import Loader from "./Loader";
 import Columns from "./Containers/Columns";
 
-interface IUser {
-    id: number;
-    name: string;
-    email: string;
+interface IColumn {
+    columnId: number;
+    boardId: string;
+    title: string;
+    backgroundColorId: string;
+    timestamp: string;
 }
 
-interface IUsers {
-    users: Array<IUser>;
+interface IColumns {
+    columns: Array<IColumn>;
 }
 
 type BoardProps = {};
 type BoardState = {
     loading: boolean;
-    list: IUsers;
+    list: IColumns;
 };
 
 class Board extends React.Component<BoardProps, BoardState> {
@@ -25,19 +27,19 @@ class Board extends React.Component<BoardProps, BoardState> {
         super(props);
         this.state = {
             loading: true,
-            list: { users: [] },
+            list: { columns: [] },
         };
     }
 
-    async loadUsers() {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/users/all`);
+    async loadColumns() {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/api/columns/all`);
         this.setState({
             list: res.data,
         });
     }
 
     componentDidMount() {
-        this.loadUsers();
+        this.loadColumns();
         this.setLoading(false);
     }
 
@@ -47,13 +49,13 @@ class Board extends React.Component<BoardProps, BoardState> {
         }));
     }
 
-    getUsersComponent = (users: Array<IUser>): JSX.Element => {
+    getColumnsComponent = (users: Array<IColumn>): JSX.Element => {
         if (users && users.length) {
             return (
                 <div>
                     {users.map(
-                        (item: IUser): JSX.Element => {
-                            return <div key={item.id}>{item.name}</div>;
+                        (item: IColumn): JSX.Element => {
+                            return <div key={item.columnId}>{item.title}</div>;
                         },
                     )}
                 </div>
@@ -62,20 +64,20 @@ class Board extends React.Component<BoardProps, BoardState> {
 
         return (
             <div>
-                <h2>No List Items Found</h2>
+                <h2>No Columns Found</h2>
             </div>
         );
     };
 
     render() {
         const { loading, list } = this.state;
-        const users = list && list.users;
+        const cols = list && list.columns;
 
         return (
             <>
                 {loading && <Loader />}
                 <div>
-                    { this.getUsersComponent(users) }
+                    { this.getColumnsComponent(cols) }
                 </div>
                 <Row>
                     <Columns />

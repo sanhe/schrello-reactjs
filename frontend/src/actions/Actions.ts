@@ -16,6 +16,11 @@ export const removeBoard = (boardId: string) => ({
     boardId,
 });
 
+export const fetchColumns = (data: any) => ({
+    type: ActionTypes.FETCH_COLUMNS,
+    payload: data,
+});
+
 export const addColumn = (title: string, backgroundColorId: string, boardId = DEFAULT_BOARD_ID) => ({
     type: ActionTypes.ADD_COLUMN,
     column: {

@@ -17,6 +17,7 @@ const columnReducer = (state: any = {}, action: any) => {
 };
 
 const columnsReducer = createReducer(initialColumnsState, {
+    [ActionTypes.FETCH_COLUMNS]: (state, action) => [...state, columnReducer({}, action)],
     [ActionTypes.ADD_COLUMN]: (state, action) => [...state, columnReducer({}, action)],
     [ActionTypes.REMOVE_COLUMN]: (state, action) => state.filter((column) => column.columnId !== action.columnId),
 });

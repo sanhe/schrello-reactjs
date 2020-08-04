@@ -4,6 +4,7 @@ const ActionTypes = keyMirror({
     CHANGE_CURRENT_BOARD_ID: null,
     ADD_BOARD: null,
     REMOVE_BOARD: null,
+    FETCH_COLUMNS: null,
     ADD_COLUMN: null,
     REMOVE_COLUMN: null,
     REMOVE_COLUMN_CARDS: null,

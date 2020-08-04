@@ -1,19 +1,6 @@
 version: '3'
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: ./Dockerfile
-    ports:
-      - 4690:5000
-    volumes:
-      - ./backend/src:/usr/src/app/src
-      - ./backend/node_modules:/usr/src/app/node_modules
-    working_dir: /usr/src/app
-    depends_on:
-      - mongo
-
   frontend:
     build:
       context: ./frontend
@@ -25,8 +12,6 @@ services:
       - ./frontend/node_modules:/usr/src/app/node_modules
     working_dir: /usr/src/app
     stdin_open: true
-    depends_on:
-      - backend
 
   frontend-test:
     build:
@@ -38,8 +23,3 @@ services:
     volumes:
       - ./frontend/src:/usr/src/app/src
       - ./frontend/node_modules:/usr/src/app/node_modules
-
-  mongo:
-    image: mongo
-    ports:
-      - '27017:27017'
