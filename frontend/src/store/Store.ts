@@ -10,13 +10,13 @@ const store = configureStore({
     reducer: rootReducer,
     middleware: getDefaultMiddleware()
         .concat(thunkMiddleware)
-        // .concat(logger)
+        .concat(logger)
         // .concat(SchrelloLoger)
         .concat(SchrelloStateStore),
     // Uncomment for use state from localStorage.
-    preloadedState: localStorage[SCHRELLO_DEFAULT_STORE_NAME]
-        ? JSON.parse(localStorage[SCHRELLO_DEFAULT_STORE_NAME])
-        : initialState,
+    // preloadedState: localStorage[SCHRELLO_DEFAULT_STORE_NAME]
+    //     ? JSON.parse(localStorage[SCHRELLO_DEFAULT_STORE_NAME])
+    //     : initialState,
 });
 
 export default store;

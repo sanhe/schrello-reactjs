@@ -16,9 +16,28 @@ export const removeBoard = (boardId: string) => ({
     boardId,
 });
 
-export const fetchColumns = (data: any) => ({
+export const fetchColumns = (columns: Array<any>) => ({
     type: ActionTypes.FETCH_COLUMNS,
-    payload: data,
+    columns
+});
+
+// export const fetchColumnsPending = () => ({
+//     type: ActionTypes.FETCH_COLUMNS_PENDING,
+// });
+
+export const fetchColumnsSuccess = (columns: Array<any>) => ({
+    type: ActionTypes.FETCH_COLUMNS_SUCCESS,
+    columns,
+});
+
+// export const fetchColumnsError = (error: any) => ({
+//     type: ActionTypes.FETCH_COLUMNS_ERROR,
+//     error,
+// });
+
+export const fetchCardSuccess = (cards: Array<any>) => ({
+    type: ActionTypes.FETCH_CARDS_SUCCESS,
+    cards,
 });
 
 export const addColumn = (title: string, backgroundColorId: string, boardId = DEFAULT_BOARD_ID) => ({

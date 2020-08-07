@@ -32,6 +32,7 @@ const editCardReducer = (state: any, action: any) => {
 };
 
 const cardsReducer = createReducer(initialCardsState, {
+    [ActionTypes.FETCH_CARDS_SUCCESS]: (state, action) => [...action.cards],
     [ActionTypes.ADD_CARD]: (state, action) => [...state, cardReducer({}, action)],
     [ActionTypes.EDIT_CARD]: (state, action) => editCardReducer(state, action),
     [ActionTypes.REMOVE_CARD]: (state, action) =>

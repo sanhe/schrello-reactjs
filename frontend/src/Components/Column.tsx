@@ -1,7 +1,7 @@
 import React from "react";
 import { Col } from "reactstrap";
 import { Button, IconButton } from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 import ColumnCards from "./Containers/ColumnCards";
 
 interface ColumnProps {
