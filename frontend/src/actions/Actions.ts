@@ -18,38 +18,42 @@ export const removeBoard = (boardId: string) => ({
 
 export const fetchColumns = (columns: Array<any>) => ({
     type: ActionTypes.FETCH_COLUMNS,
-    columns
+    columns,
 });
 
-// export const fetchColumnsPending = () => ({
-//     type: ActionTypes.FETCH_COLUMNS_PENDING,
-// });
+export const fetchColumnsPending = () => ({
+    type: ActionTypes.FETCH_COLUMNS_PENDING,
+});
 
 export const fetchColumnsSuccess = (columns: Array<any>) => ({
     type: ActionTypes.FETCH_COLUMNS_SUCCESS,
     columns,
 });
 
-// export const fetchColumnsError = (error: any) => ({
-//     type: ActionTypes.FETCH_COLUMNS_ERROR,
-//     error,
-// });
+export const fetchColumnsError = (error: any) => ({
+    type: ActionTypes.FETCH_COLUMNS_ERROR,
+    error,
+});
 
 export const fetchCardSuccess = (cards: Array<any>) => ({
     type: ActionTypes.FETCH_CARDS_SUCCESS,
     cards,
 });
 
-export const addColumn = (title: string, backgroundColorId: string, boardId = DEFAULT_BOARD_ID) => ({
-    type: ActionTypes.ADD_COLUMN,
-    column: {
-        columnId: nanoid(),
-        boardId,
-        title,
-        backgroundColorId,
-        timestamp: new Date().toString(),
-    },
-});
+export const addColumn = (title: string, backgroundColorId: string, boardId = DEFAULT_BOARD_ID) => {
+    const id = nanoid();
+    return {
+        type: ActionTypes.ADD_COLUMN,
+        column: {
+            _id: id,
+            columnId: id,
+            boardId,
+            title,
+            backgroundColorId,
+            timestamp: new Date().toString(),
+        },
+    };
+};
 
 export const removeColumn = (columnId: string) => ({
     type: ActionTypes.REMOVE_COLUMN,

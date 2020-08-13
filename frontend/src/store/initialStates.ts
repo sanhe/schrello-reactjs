@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import ModalTypes from "../types/ModalTypes";
 
 export const DEFAULT_BOARD_ID = "boardId1";
@@ -40,9 +41,9 @@ export const initialColors = [
 export const DEFAULT_CARD_BACKGROUND_COLOR_ID = "1";
 
 export interface BoardInterface {
-    boardId: string,
-    title: string,
-    timestamp: string,
+    boardId: string;
+    title: string;
+    timestamp: string;
 }
 
 export const initialBoardsState: BoardInterface[] = [
@@ -54,44 +55,58 @@ export const initialBoardsState: BoardInterface[] = [
 ];
 
 export interface ColumnInterface {
-    columnId: string,
-    boardId: string,
-    title: string,
-    backgroundColorId: string,
-    timestamp: string,
+    _id: string;
+    columnId: string;
+    boardId: string;
+    title: string;
+    backgroundColorId: string;
+    timestamp: string;
 }
 
-export const initialColumnsState: ColumnInterface[] = [
-    {
-        columnId: "1",
-        boardId: DEFAULT_BOARD_ID,
-        title: "Default column",
-        backgroundColorId: "1",
-        timestamp: new Date().toString(),
-    },
-    {
-        columnId: "2",
-        boardId: DEFAULT_BOARD_ID,
-        title: "Second column",
-        backgroundColorId: "1",
-        timestamp: new Date().toString(),
-    },
-    {
-        columnId: "3",
-        boardId: DEFAULT_BOARD_ID,
-        title: "Second column",
-        backgroundColorId: "1",
-        timestamp: new Date().toString(),
-    },
-];
+export interface ColumnsInterface {
+    pending: boolean;
+    error: string;
+    columns: ColumnInterface[];
+}
+
+export const initialColumnsState: ColumnsInterface = {
+    pending: false,
+    error: "",
+    columns: [
+        {
+            _id: "1",
+            columnId: "1",
+            boardId: DEFAULT_BOARD_ID,
+            title: "Default column",
+            backgroundColorId: "1",
+            timestamp: new Date().toString(),
+        },
+        {
+            _id: "2",
+            columnId: "2",
+            boardId: DEFAULT_BOARD_ID,
+            title: "Second column",
+            backgroundColorId: "1",
+            timestamp: new Date().toString(),
+        },
+        {
+            _id: "3",
+            columnId: "3",
+            boardId: DEFAULT_BOARD_ID,
+            title: "Second column",
+            backgroundColorId: "1",
+            timestamp: new Date().toString(),
+        },
+    ],
+};
 
 export interface CardInterface {
     cardId: string;
-    columnId: string,
-    title: string,
-    content: string,
-    backgroundColorId: string,
-    timestamp: string,
+    columnId: string;
+    title: string;
+    content: string;
+    backgroundColorId: string;
+    timestamp: string;
 }
 
 export const initialCardsState: CardInterface[] = [

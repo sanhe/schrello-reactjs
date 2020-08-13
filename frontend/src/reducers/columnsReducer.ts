@@ -17,9 +17,28 @@ const columnReducer = (state: any = {}, action: any) => {
 };
 
 const columnsReducer = createReducer(initialColumnsState, {
-    [ActionTypes.FETCH_COLUMNS_SUCCESS]: (state, action) => [...action.columns],
-    [ActionTypes.ADD_COLUMN]: (state, action) => [...state, columnReducer({}, action)],
-    [ActionTypes.REMOVE_COLUMN]: (state, action) => state.filter((column) => column.columnId !== action.columnId),
+    [ActionTypes.FETCH_COLUMNS_PENDING]: (state, action) => ({
+        ...state,
+        pending: true,
+    }),
+    [ActionTypes.FETCH_COLUMNS_SUCCESS]: (state, action) => ({
+        ...state,
+        pending: false,
+        columns: [...action.columns],
+    }),
+    [ActionTypes.FETCH_COLUMNS_ERROR]: (state, action) => ({
+        ...state,
+        pending: false,
+        error: action.error,
+    }),
+    [ActionTypes.ADD_COLUMN]: (state, action) => ({
+        ...state,
+        columns: [...state.columns, columnReducer({}, action)],
+    }),
+    [ActionTypes.REMOVE_COLUMN]: (state, action) => ({
+        ...state,
+        columns: state.columns.filter((column) => column.columnId !== action.columnId),
+    }),
 });
 
 export default columnsReducer;
